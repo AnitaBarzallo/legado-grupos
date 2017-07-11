@@ -5,31 +5,63 @@
  */
 package com.legado.grupo.dom;
 
-/**
- *
- * @author Anita
- */
-public class Carrera {
-    int id_carrera;
-	String nombre;
-	int id_facultad;
-	
-	public int getId_carrera() {
-		return id_carrera;
-	}
-	public void setId_carrera(int id_carrera) {
-		this.id_carrera = id_carrera;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public int getId_facultad() {
-		return id_facultad;
-	}
-	public void setId_facultad(int id_facultad) {
-		this.id_facultad = id_facultad;
-	}
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name="carreras")
+public class Carrera implements Serializable{
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private int idCarrera;
+    
+    private String nombre;
+    @OneToMany(mappedBy = "carrera")
+    private List<Asignatura> asignaturas;
+    @ManyToOne
+    private Facultad facultad;
+
+    public Carrera() {
+    }
+    
+    public Carrera(int idCarrera, String nombre) {
+        this.idCarrera = idCarrera;
+        this.nombre = nombre;
+        this.asignaturas = new ArrayList<>();
+    }
+    
+    public Carrera(String nombre) {
+        this.nombre = nombre;
+        this.asignaturas = new ArrayList<>();
+    }
+
+    public int getIdCarrera() {
+        return idCarrera;
+    }
+
+    public void setIdCarrera(int idCarrera) {
+        this.idCarrera = idCarrera;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Asignatura> getAsignaturas() {
+        return asignaturas;
+    }
+
+    public void setAsignaturas(List<Asignatura> asignaturas) {
+        this.asignaturas = asignaturas;
+    }
+    
+        
+
+
 }

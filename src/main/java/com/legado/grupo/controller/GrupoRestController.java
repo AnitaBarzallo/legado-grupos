@@ -5,7 +5,7 @@
  */
 package com.legado.grupo.controller;
 
-import com.legado.grupo.dom.Archivo;
+import com.legado.grupo.dom.Asignatura;
 import com.legado.grupo.dom.Carrera;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,9 +22,9 @@ public class GrupoRestController {
     private static final Logger logger = Logger.getLogger(RestController.class.getName());
     //Solicitud del usuario y método
     @RequestMapping(value = "/lista", method = RequestMethod.GET)
-    public Archivo respuesta(@RequestParam String id_grupo) {
+    public Asignatura respuesta(@RequestParam String id_grupo) {
         logger.log(Level.INFO, "Peticion", id_grupo);
-        Archivo a = new Archivo("pizza.pdf", "helio");
+        Asignatura a = new Asignatura("Mate");
         //La lib json-smart se encarga de convertir automaticamente en json al retornar en un restcontroller
         //Alternativamente pueden armar con gson
         return a;
@@ -35,9 +35,9 @@ public class GrupoRestController {
     public Carrera get_materia_carrera() {
         logger.log(Level.INFO, "Peticion");
         Carrera c = new Carrera();
-        c.setId_carrera(1);
-        c.setNombre("Ingenieria de Sistemas");
-        c.setId_facultad(1);
+//        c.setId_carrera(1);
+//        c.setNombre("Ingenieria de Sistemas");
+//        c.setId_facultad(1);
         return c;
     }
     
