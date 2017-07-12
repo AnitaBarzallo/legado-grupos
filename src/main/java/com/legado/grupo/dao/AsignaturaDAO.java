@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@Service
+//@Service
 public class AsignaturaDAO {
-    @PersistenceContext
+    /*/@PersistenceContext
     private EntityManager em;
     @Autowired
     private DataSource dataSource;
@@ -22,5 +22,5 @@ public class AsignaturaDAO {
     
     public void modificar () throws Exception{ }
     public void listar () throws Exception{ }
-    public void eliminar() throws Exception{ }
+    public void eliminar() throws Exception{ }*/
 }

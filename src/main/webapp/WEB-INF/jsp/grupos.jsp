@@ -1,9 +1,3 @@
-<%-- 
-    Document   : archivos
-    Created on : Jul 2, 2017, 10:52:24 AM
-    Author     : helio
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
