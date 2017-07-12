@@ -9,6 +9,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name="carreras")
@@ -18,8 +20,11 @@ public class Carrera implements Serializable{
     private int idCarrera;
     
     private String nombre;
+    
     @OneToMany(mappedBy = "carrera")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Asignatura> asignaturas;
+    
     @ManyToOne
     private Facultad facultad;
 
@@ -30,11 +35,13 @@ public class Carrera implements Serializable{
         this.idCarrera = idCarrera;
         this.nombre = nombre;
         this.asignaturas = new ArrayList<>();
+        this.facultad=new Facultad();
     }
     
     public Carrera(String nombre) {
         this.nombre = nombre;
         this.asignaturas = new ArrayList<>();
+        this.facultad=new Facultad();
     }
 
     public int getIdCarrera() {
@@ -61,7 +68,19 @@ public class Carrera implements Serializable{
         this.asignaturas = asignaturas;
     }
     
-        
+    public void addAsignatura(Asignatura asignatura){
+        this.asignaturas.add(asignatura);
+    }
+
+    public Facultad getFacultad() {
+        return facultad;
+    }
+
+    public void setFacultad(Facultad facultad) {
+        this.facultad = facultad;
+    }
+    
+    
 
 
 }

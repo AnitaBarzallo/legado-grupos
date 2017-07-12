@@ -9,6 +9,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name="grupos")
@@ -19,7 +21,9 @@ public class Grupo implements Serializable{
     private int idGrupo;
     
     private String nombre;
+    
     @OneToMany(mappedBy = "grupo")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Miembro> miembros;
     @ManyToOne
     private Asignatura asignatura;

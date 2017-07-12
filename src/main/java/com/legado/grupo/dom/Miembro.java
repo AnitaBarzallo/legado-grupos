@@ -5,8 +5,7 @@
  */
 package com.legado.grupo.dom;
 
-import java.util.Set;
-import java.util.TreeSet;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -26,6 +25,7 @@ public class Miembro implements Serializable {
 
     public Miembro(int idMiembro) {
         this.idMiembro = idMiembro;
+        this.grupo=new Grupo();
     }
 
     public int getIdMiembro() {
@@ -35,8 +35,13 @@ public class Miembro implements Serializable {
     public void setIdMiembro(int idMiembro) {
         this.idMiembro = idMiembro;
     }
-    
-    
 
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
+    }
     
 }

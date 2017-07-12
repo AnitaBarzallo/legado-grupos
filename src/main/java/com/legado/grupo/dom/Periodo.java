@@ -10,11 +10,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name="periodos")
 
-class Periodo implements Serializable {
+public class Periodo implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int idPeriodo;
@@ -23,6 +25,7 @@ class Periodo implements Serializable {
     private Date fechaInicio;
     
     @OneToMany(mappedBy = "periodo")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Grupo> grupos;
 
     public Periodo() {

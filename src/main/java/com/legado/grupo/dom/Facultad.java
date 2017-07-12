@@ -5,12 +5,13 @@
  */
 package com.legado.grupo.dom;
 
-import java.util.Set;
-import java.util.TreeSet;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name="facultades")
@@ -21,7 +22,9 @@ public class Facultad implements Serializable{
     private int idFacultad; 
     
     private String nombre;
-    @OneToMany(mappedBy = "facultad")
+    
+    @OneToMany(mappedBy = "facultad",cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Carrera> carreras;
 
     public Facultad() {
@@ -36,6 +39,12 @@ public class Facultad implements Serializable{
         this.idFacultad = idFacultad;
         this.nombre = nombre;
         this.carreras = new ArrayList<>();
+    }
+
+    public Facultad(int idFacultad, String nombre, List<Carrera> carreras) {
+        this.idFacultad = idFacultad;
+        this.nombre = nombre;
+        this.carreras = carreras;
     }
 
     public int getIdFacultad() {
@@ -65,7 +74,5 @@ public class Facultad implements Serializable{
     public void addCarrera(Carrera carrera){
         carreras.add(carrera);
     }
-    
-    
             
 }
