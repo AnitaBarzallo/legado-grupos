@@ -17,11 +17,7 @@ public class PeriodoDAO implements Crud {
     private PeriodoRepositorio repositorio;
     
     public void agregar(Periodo periodo) {
-        //bidireccionalidad Carrera-Asignatura: Una Asignatura pertenece a una Carrera
-        for(Grupo grupo:periodo.getGrupos()){
-            grupo.setPeriodo(periodo);
-            actualizar(grupo);
-        }
+        
         repositorio.save(periodo);      
     }
 

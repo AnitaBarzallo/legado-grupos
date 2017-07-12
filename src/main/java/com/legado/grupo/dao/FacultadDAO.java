@@ -18,11 +18,7 @@ public class FacultadDAO implements Crud {
     
     
     public void agregar(Facultad facultad) {
-        //bidireccionalidad Facultad-Carrera: Una Carrera pertenece a una facultad
-        for(Carrera carrera:facultad.getCarreras()){
-            carrera.setFacultad(facultad);
-            actualizar(carrera);
-        }
+        
         repositorio.save(facultad);      
     }
 

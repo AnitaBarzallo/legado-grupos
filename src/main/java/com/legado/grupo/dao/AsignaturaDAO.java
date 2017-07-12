@@ -19,11 +19,7 @@ public class AsignaturaDAO implements Crud{
         if(asignatura!=null){
             asignatura.setCarrera(carrera);
         }
-        //bidireccionalidad Asignatura-Grupo: Una Asignatura pertenece a un Grupo
-        for(Grupo grupo:asignatura.getGrupos()){
-            grupo.setAsignatura(asignatura);
-            actualizar(asignatura);
-        }
+        
         repositorio.save(asignatura);
     }
 

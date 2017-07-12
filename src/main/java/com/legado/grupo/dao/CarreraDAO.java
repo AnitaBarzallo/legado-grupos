@@ -22,11 +22,7 @@ public class CarreraDAO implements Crud {
         if(facultad!=null){
             carrera.setFacultad(facultad);
         }
-        //bidireccionalidad Carrera-Asignatura: Una Asignatura pertenece a una Carrera
-        for(Asignatura asignatura:carrera.getAsignaturas()){
-            asignatura.setCarrera(carrera);
-            actualizar(asignatura);
-        }
+        
         repositorio.save(carrera);     
     }
 

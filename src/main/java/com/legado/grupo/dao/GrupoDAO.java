@@ -28,11 +28,7 @@ public class GrupoDAO implements Crud {
             grupo.setPeriodo(periodo);
         }
         
-        //bidireccional: Un miembro tiene pertenece a un grupo
-        for(Miembro miembro:grupo.getMiembros()){
-            miembro.setGrupo(grupo);
-            actualizar(grupo);
-        }
+        
         repositorio.save(grupo);
     }
 
