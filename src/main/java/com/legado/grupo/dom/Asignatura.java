@@ -34,6 +34,30 @@ public class Asignatura implements Serializable{
         this.grupos=new ArrayList<>();
 
     }
+
+    public int getIdAsignatura() {
+        return idAsignatura;
+    }
+
+    public void setIdAsignatura(int idAsignatura) {
+        this.idAsignatura = idAsignatura;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Carrera getCarrera() {
+        return carrera;
+    }
+
+    public void setCarrera(Carrera carrera) {
+        this.carrera = carrera;
+    }
     
     public List<Grupo> getGrupos() {
         return grupos;
@@ -46,6 +70,8 @@ public class Asignatura implements Serializable{
     public void addGrupo(Grupo grupo){
         this.grupos.add(grupo);
     }
+    
+    
     
     
 }
