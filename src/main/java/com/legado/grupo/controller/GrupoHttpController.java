@@ -37,7 +37,7 @@ public class GrupoHttpController {
         ModelAndView mv = new ModelAndView();
         //Esto carga parámetros en el jsp
         mv.addObject("nombre", "Anita");
-        //Esto carga el jsp correspondiente como la vista ante la solicitud del usuario
+        //Esto carga el jsp correspondiente como la vista ante la solicitud del Usuario
         mv.setViewName("grupos");
 	return mv;
     }

@@ -38,7 +38,7 @@ public class GrupoRestController {
 //        c.setId_carrera(1);
 //        c.setNombre("Ingenieria de Sistemas");
 //        c.setId_facultad(1);
-        return c;
+        return c;/**/
     }
     
 }
