@@ -3,23 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.legado.grupo.dao;
+package com.legado.grupo.dao.I;
 
-import com.legado.grupo.dom.Asignatura;
 import java.util.List;
 
-
-public interface Crud {
+public interface Crud<T> {
       
-    public Object buscarPorID(int id);
-  
-    public void actualizar(Object o);
+    public T buscarPorID(int id);
+      
+    public void actualizar(T o);
  
     public void eliminarPorId(int id);
  
     public void eliminarTodo();
  
-    public List<Object> listar();
+    public List<T> listar();
     
     public boolean existe(int id);
     

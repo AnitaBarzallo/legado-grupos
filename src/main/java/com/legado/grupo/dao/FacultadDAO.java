@@ -5,31 +5,34 @@
  */
 package com.legado.grupo.dao;
 
-import com.legado.grupo.dom.Carrera;
+import com.legado.grupo.dao.I.Crud;
+import com.legado.grupo.dao.I.FacultadRepositorio;
 import com.legado.grupo.dom.Facultad;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class FacultadDAO implements Crud {
+public class FacultadDAO implements Crud<Facultad> {
     @Autowired
     private FacultadRepositorio repositorio;
     
-    
     public void agregar(Facultad facultad) {
-        
         repositorio.save(facultad);      
     }
 
     @Override
-    public Object buscarPorID(int id) {
+    public Facultad buscarPorID(int id) {
         return repositorio.findOne(id);
+    }
+    
+    public Facultad buscarPorNombre(String nombre) {
+        return repositorio.findByNombre(nombre);
     }
 
     @Override
-    public void actualizar(Object o) {
-        repositorio.save((Facultad)o);
+    public void actualizar(Facultad o) {
+        repositorio.save(o);
     }
 
     @Override
@@ -37,7 +40,6 @@ public class FacultadDAO implements Crud {
         if(existe(id)){
             repositorio.delete(id);
         }
-
     }
 
     @Override
@@ -46,8 +48,8 @@ public class FacultadDAO implements Crud {
     }
 
     @Override
-    public List<Object> listar() {
-        return (List)repositorio.findAll();
+    public List<Facultad> listar() {
+        return (List<Facultad>) repositorio.findAll();
     }
 
     @Override

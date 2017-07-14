@@ -5,7 +5,8 @@
  */
 package com.legado.grupo.dao;
 
-import com.legado.grupo.dom.Asignatura;
+import com.legado.grupo.dao.I.Crud;
+import com.legado.grupo.dao.I.CarreraRepositorio;
 import com.legado.grupo.dom.Carrera;
 import com.legado.grupo.dom.Facultad;
 import java.util.List;
@@ -13,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CarreraDAO implements Crud {
+public class CarreraDAO implements Crud<Carrera> {
     @Autowired
     private CarreraRepositorio repositorio;
     
@@ -22,18 +23,21 @@ public class CarreraDAO implements Crud {
         if(facultad!=null){
             carrera.setFacultad(facultad);
         }
-        
         repositorio.save(carrera);     
     }
 
     @Override
-    public Object buscarPorID(int id) {
+    public Carrera buscarPorID(int id) {
         return repositorio.findOne(id);
+    }
+    
+    public Carrera buscarPorNombre(String nombre) {
+        return repositorio.findByNombre(nombre);
     }
 
     @Override
-    public void actualizar(Object o) {
-        repositorio.save((Carrera)o);
+    public void actualizar(Carrera o) {
+        repositorio.save(o);
     }
 
     @Override
@@ -49,8 +53,8 @@ public class CarreraDAO implements Crud {
     }
 
     @Override
-    public List<Object> listar() {
-        return (List)repositorio.findAll();
+    public List<Carrera> listar() {
+        return (List<Carrera>) repositorio.findAll();
     }
     
     @Override

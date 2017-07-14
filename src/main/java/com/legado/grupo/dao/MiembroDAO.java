@@ -5,28 +5,30 @@
  */
 package com.legado.grupo.dao;
 
+import com.legado.grupo.dao.I.Crud;
+import com.legado.grupo.dao.I.MiembroRepositorio;
 import com.legado.grupo.dom.Miembro;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MiembroDAO implements Crud {
+public class MiembroDAO implements Crud<Miembro> {
     @Autowired
     private MiembroRepositorio repositorio;
     
-    public void agregar(Object o) {
-        repositorio.save((Miembro)o);      
+    public void agregar(Miembro miembro) {
+        repositorio.save(miembro);      
     }
 
     @Override
-    public Object buscarPorID(int id) {
+    public Miembro buscarPorID(int id) {
         return repositorio.findOne(id);
     }
 
     @Override
-    public void actualizar(Object o) {
-        repositorio.save((Miembro)o);
+    public void actualizar(Miembro o) {
+        repositorio.save(o);
     }
 
     @Override
@@ -42,8 +44,8 @@ public class MiembroDAO implements Crud {
     }
 
     @Override
-    public List<Object> listar() {
-        return (List)repositorio.findAll();
+    public List<Miembro> listar() {
+        return (List<Miembro>) repositorio.findAll();
     }
 
     @Override

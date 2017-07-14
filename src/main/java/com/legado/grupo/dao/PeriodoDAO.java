@@ -5,30 +5,30 @@
  */
 package com.legado.grupo.dao;
 
-import com.legado.grupo.dom.Grupo;
+import com.legado.grupo.dao.I.Crud;
+import com.legado.grupo.dao.I.PeriodoRepositorio;
 import com.legado.grupo.dom.Periodo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PeriodoDAO implements Crud {
+public class PeriodoDAO implements Crud<Periodo> {
     @Autowired
     private PeriodoRepositorio repositorio;
     
     public void agregar(Periodo periodo) {
-        
         repositorio.save(periodo);      
     }
 
     @Override
-    public Object buscarPorID(int id) {
+    public Periodo buscarPorID(int id) {
         return repositorio.findOne(id);
     }
 
     @Override
-    public void actualizar(Object o) {
-        repositorio.save((Periodo)o);
+    public void actualizar(Periodo o) {
+        repositorio.save(o);
     }
 
     @Override
@@ -44,8 +44,8 @@ public class PeriodoDAO implements Crud {
     }
 
     @Override
-    public List<Object> listar() {
-        return (List)repositorio.findAll();
+    public List<Periodo> listar() {
+        return (List<Periodo>) repositorio.findAll();
     }
 
     @Override

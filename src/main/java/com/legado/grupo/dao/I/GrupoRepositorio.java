@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.legado.grupo.dao;
-import com.legado.grupo.dom.Miembro;
+package com.legado.grupo.dao.I;
+import com.legado.grupo.dom.Grupo;
 import org.springframework.data.repository.CrudRepository;
 
-public interface MiembroRepositorio extends CrudRepository<Miembro, Integer>{
-    
+public interface GrupoRepositorio extends CrudRepository<Grupo, Integer>{
+    Grupo findByNombre(String nombre);
 }

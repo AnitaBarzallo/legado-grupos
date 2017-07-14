@@ -2,15 +2,16 @@
 package com.legado.grupo.dao;
 
 
+import com.legado.grupo.dao.I.Crud;
+import com.legado.grupo.dao.I.AsignaturaRepositorio;
 import com.legado.grupo.dom.Asignatura;
 import com.legado.grupo.dom.Carrera;
-import com.legado.grupo.dom.Grupo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class AsignaturaDAO implements Crud{
+public class AsignaturaDAO implements Crud<Asignatura>{
     @Autowired
     private AsignaturaRepositorio repositorio;
     
@@ -19,17 +20,20 @@ public class AsignaturaDAO implements Crud{
         if(asignatura!=null){
             asignatura.setCarrera(carrera);
         }
-        
         repositorio.save(asignatura);
     }
 
     @Override
-    public Object buscarPorID(int id) {
+    public Asignatura buscarPorID(int id) {
         return repositorio.findOne(id);
+    }
+    
+    public Asignatura buscarPorNombre(String nombre) {
+        return repositorio.findByNombre(nombre);
     }
 
     @Override
-    public void actualizar(Object o) {
+    public void actualizar(Asignatura o) {
         repositorio.save((Asignatura)o);
     }
 
@@ -46,8 +50,8 @@ public class AsignaturaDAO implements Crud{
     }
 
     @Override
-    public List<Object> listar() {
-        return (List)repositorio.findAll();
+    public List<Asignatura> listar() {
+        return (List<Asignatura>) repositorio.findAll();
     }
     
     @Override

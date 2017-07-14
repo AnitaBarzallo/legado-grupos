@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.legado.grupo.dao;
-import com.legado.grupo.dom.Asignatura;
+package com.legado.grupo.dao.I;
+import com.legado.grupo.dom.Facultad;
 import org.springframework.data.repository.CrudRepository;
 
-public interface AsignaturaRepositorio extends CrudRepository<Asignatura, Integer>{
-    
+public interface FacultadRepositorio extends CrudRepository<Facultad, Integer>{
+    Facultad findByNombre(String nombre);
 }

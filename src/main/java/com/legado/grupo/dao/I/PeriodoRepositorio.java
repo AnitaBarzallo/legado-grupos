@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.legado.grupo.dao;
-import com.legado.grupo.dom.Carrera;
+package com.legado.grupo.dao.I;
+import com.legado.grupo.dom.Periodo;
 import org.springframework.data.repository.CrudRepository;
 
-public interface CarreraRepositorio extends CrudRepository<Carrera, Integer>{
+public interface PeriodoRepositorio extends CrudRepository<Periodo, Integer>{
     
 }

@@ -23,7 +23,7 @@ public class Facultad implements Serializable{
     
     private String nombre;
     
-    @OneToMany(mappedBy = "facultad",cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "facultad")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Carrera> carreras;
 
