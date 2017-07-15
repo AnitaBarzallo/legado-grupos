@@ -16,7 +16,7 @@ public class Miembro implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
    
-    private int idMiembro;
+    private int id_usuario;
     @ManyToOne
     private Grupo grupo;
     
@@ -24,16 +24,16 @@ public class Miembro implements Serializable {
     }
 
     public Miembro(int idMiembro) {
-        this.idMiembro = idMiembro;
+        this.id_usuario = idMiembro;
         this.grupo=new Grupo();
     }
 
     public int getIdMiembro() {
-        return idMiembro;
+        return id_usuario;
     }
 
     public void setIdMiembro(int idMiembro) {
-        this.idMiembro = idMiembro;
+        this.id_usuario = idMiembro;
     }
 
     public Grupo getGrupo() {
@@ -46,7 +46,7 @@ public class Miembro implements Serializable {
 
     @Override
     public String toString() {
-        return "Miembro{" + "idMiembro=" + idMiembro + ", grupo=" + grupo.getNombre() + '}';
+        return "Miembro{" + "idMiembro=" + id_usuario + ", grupo=" + grupo.getNombre() + '}';
     }
     
     

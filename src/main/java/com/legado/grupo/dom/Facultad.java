@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.legado.grupo.dom;
 
 
@@ -19,7 +15,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 public class Facultad implements Serializable{    
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int idFacultad; 
+    private int id_facultad; 
     
     private String nombre;
     
@@ -36,23 +32,23 @@ public class Facultad implements Serializable{
     }
 
     public Facultad(int idFacultad, String nombre) {
-        this.idFacultad = idFacultad;
+        this.id_facultad = idFacultad;
         this.nombre = nombre;
         this.carreras = new ArrayList<>();
     }
 
     public Facultad(int idFacultad, String nombre, List<Carrera> carreras) {
-        this.idFacultad = idFacultad;
+        this.id_facultad = idFacultad;
         this.nombre = nombre;
         this.carreras = carreras;
     }
 
     public int getIdFacultad() {
-        return idFacultad;
+        return id_facultad;
     }
 
     public void setIdFacultad(int idFacultad) {
-        this.idFacultad = idFacultad;
+        this.id_facultad = idFacultad;
     }
 
     public String getNombre() {
@@ -77,7 +73,7 @@ public class Facultad implements Serializable{
 
     @Override
     public String toString() {
-        return "Facultad{" + "idFacultad=" + idFacultad + ", nombre=" + nombre + ", carreras=" + carreras + '}';
+        return "Facultad{" + "idFacultad=" + id_facultad + ", nombre=" + nombre + ", carreras=" + carreras + '}';
     }
             
     

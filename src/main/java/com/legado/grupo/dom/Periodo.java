@@ -19,7 +19,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 public class Periodo implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int idPeriodo;
+    private int id_periodo;
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaInicio;
@@ -37,16 +37,16 @@ public class Periodo implements Serializable {
     }
     
     public Periodo(int idPeriodo, Date fechaInicio) {
-        this.idPeriodo = idPeriodo;
+        this.id_periodo = idPeriodo;
         this.fechaInicio = fechaInicio;
     }
 
     public int getIdPeriodo() {
-        return idPeriodo;
+        return id_periodo;
     }
 
     public void setIdPeriodo(int idPeriodo) {
-        this.idPeriodo = idPeriodo;
+        this.id_periodo = idPeriodo;
     }
 
     public Date getFechaInicio() {
@@ -71,7 +71,7 @@ public class Periodo implements Serializable {
 
     @Override
     public String toString() {
-        return "Periodo{" + "idPeriodo=" + idPeriodo + ", fechaInicio=" + fechaInicio + ", grupos=" + grupos + '}';
+        return "Periodo{" + "idPeriodo=" + id_periodo + ", fechaInicio=" + fechaInicio + ", grupos=" + grupos + '}';
     }
     
     

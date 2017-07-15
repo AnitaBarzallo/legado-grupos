@@ -16,7 +16,7 @@ import java.util.List;
 public class Grupo implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int idGrupo;
+    private int id_grupo;
     
     private String nombre;
     
@@ -39,7 +39,7 @@ public class Grupo implements Serializable{
     }
     
     public Grupo(int idGrupo, String nombre, Periodo periodo, Asignatura asignatura) {
-        this.idGrupo = idGrupo;
+        this.id_grupo = idGrupo;
         this.nombre = nombre;
         this.periodo = periodo;
         this.asignatura = asignatura;
@@ -47,11 +47,11 @@ public class Grupo implements Serializable{
     }
 
     public int getIdGrupo() {
-        return idGrupo;
+        return id_grupo;
     }
 
     public void setIdGrupo(int idGrupo) {
-        this.idGrupo = idGrupo;
+        this.id_grupo = idGrupo;
     }
 
     public String getNombre() {
@@ -92,7 +92,7 @@ public class Grupo implements Serializable{
 
     @Override
     public String toString() {
-        return "Grupo{" + "idGrupo=" + idGrupo + ", nombre=" + nombre + ", miembros=" + miembros + ", asignatura=" + asignatura.getNombre() + ", periodo=" + periodo.getFechaInicio() + '}';
+        return "Grupo{" + "idGrupo=" + id_grupo + ", nombre=" + nombre + ", miembros=" + miembros + ", asignatura=" + asignatura.getNombre() + ", periodo=" + periodo.getFechaInicio() + '}';
     }
     
     

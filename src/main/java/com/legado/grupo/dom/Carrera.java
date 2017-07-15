@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.legado.grupo.dom;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,22 +14,22 @@ import org.hibernate.annotations.LazyCollectionOption;
 public class Carrera implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int idCarrera;
+    private int id_carrera;
     
     private String nombre;
     
     @OneToMany(mappedBy = "carrera")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Asignatura> asignaturas;
+    @JsonIgnore private List<Asignatura> asignaturas;
     
     @ManyToOne
-    private Facultad facultad;
+    @JsonIgnore private Facultad facultad;
 
     public Carrera() {
     }
     
     public Carrera(int idCarrera, String nombre) {
-        this.idCarrera = idCarrera;
+        this.id_carrera = idCarrera;
         this.nombre = nombre;
         this.asignaturas = new ArrayList<>();
         this.facultad=new Facultad();
@@ -45,11 +42,11 @@ public class Carrera implements Serializable{
     }
 
     public int getIdCarrera() {
-        return idCarrera;
+        return id_carrera;
     }
 
     public void setIdCarrera(int idCarrera) {
-        this.idCarrera = idCarrera;
+        this.id_carrera = idCarrera;
     }
 
     public String getNombre() {
@@ -82,7 +79,7 @@ public class Carrera implements Serializable{
 
     @Override
     public String toString() {
-        return "Carrera{" + "idCarrera=" + idCarrera + ", nombre=" + nombre + ", asignaturas=" + asignaturas + ", facultad=" + facultad.getNombre() + '}';
+        return "Carrera{" + "idCarrera=" + id_carrera + ", nombre=" + nombre + ", asignaturas=" + asignaturas + ", facultad=" + facultad.getNombre() + '}';
     }
     
 }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.legado.grupo.controller;
 
 import com.legado.grupo.dom.Asignatura;
@@ -13,10 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-/**
- *
- * @author helio
- */
+
 @RestController
 public class GrupoRestController {
     private static final Logger logger = Logger.getLogger(RestController.class.getName());
@@ -45,7 +38,7 @@ public class GrupoRestController {
     //Obtener Lista de todas las carreras que pertenecen a una facultad
     @RequestMapping(value = "/get_lista_facultad", method = RequestMethod.GET)
     public Carrera get_lista_facultad() {
-        logger.log(Level.INFO, "Peticion: localhost:9092/get_lista_facultad");
+        logger.log(Level.INFO, "GET: localhost:9092/get_lista_facultad");
         
         return null;
     }

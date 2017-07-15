@@ -12,7 +12,7 @@ import java.util.List;
 public class Asignatura implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int idAsignatura;
+    private int id_materia;
     
     private String nombre;
     
@@ -31,18 +31,18 @@ public class Asignatura implements Serializable{
     }
     
     public Asignatura(int idAsignatura, String nombre) {
-        this.idAsignatura = idAsignatura;
+        this.id_materia = idAsignatura;
         this.nombre = nombre;
         this.grupos=new ArrayList<>();
 
     }
 
     public int getIdAsignatura() {
-        return idAsignatura;
+        return id_materia;
     }
 
     public void setIdAsignatura(int idAsignatura) {
-        this.idAsignatura = idAsignatura;
+        this.id_materia = idAsignatura;
     }
 
     public String getNombre() {
@@ -75,7 +75,7 @@ public class Asignatura implements Serializable{
 
     @Override
     public String toString() {
-        return "Asignatura{" + "idAsignatura=" + idAsignatura + ", nombre=" + nombre + ", carrera=" + carrera.getNombre() + ", grupos=" + grupos + '}';
+        return "Asignatura{" + "idAsignatura=" + id_materia + ", nombre=" + nombre + ", carrera=" + carrera.getNombre() + ", grupos=" + grupos + '}';
     }
     
     
