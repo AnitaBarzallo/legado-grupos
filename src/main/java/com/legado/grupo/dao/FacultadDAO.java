@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.legado.grupo.dao;
 
 import com.legado.grupo.dao.I.Crud;
@@ -14,18 +9,22 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class FacultadDAO implements Crud<Facultad> {
+
     @Autowired
     private FacultadRepositorio repositorio;
-    
-    public void agregar(Facultad facultad) {
-        repositorio.save(facultad);      
+
+    public void agregar(Facultad facultad) throws Exception {
+        if (existe(facultad)) {
+            throw new Exception("La facultad " + facultad.getNombre() + " ya existe!");
+        }
+        repositorio.save(facultad);
     }
 
     @Override
     public Facultad buscarPorID(int id) {
         return repositorio.findOne(id);
     }
-    
+
     public Facultad buscarPorNombre(String nombre) {
         return repositorio.findByNombre(nombre);
     }
@@ -37,7 +36,7 @@ public class FacultadDAO implements Crud<Facultad> {
 
     @Override
     public void eliminarPorId(int id) {
-        if(existe(id)){
+        if (existe(id)) {
             repositorio.delete(id);
         }
     }
@@ -56,7 +55,12 @@ public class FacultadDAO implements Crud<Facultad> {
     public boolean existe(int id) {
         return repositorio.exists(id);
     }
-    
 
+    public boolean existe(Facultad facultad) {
+        if (repositorio.findByNombre(facultad.getNombre()) != null) {
+            return true;
+        }
+        return false;
+    }
 
 }

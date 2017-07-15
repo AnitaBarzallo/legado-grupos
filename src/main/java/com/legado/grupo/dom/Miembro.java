@@ -43,5 +43,11 @@ public class Miembro implements Serializable {
     public void setGrupo(Grupo grupo) {
         this.grupo = grupo;
     }
+
+    @Override
+    public String toString() {
+        return "Miembro{" + "idMiembro=" + idMiembro + ", grupo=" + grupo.getNombre() + '}';
+    }
+    
     
 }

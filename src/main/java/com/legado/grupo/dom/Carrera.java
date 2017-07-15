@@ -79,8 +79,10 @@ public class Carrera implements Serializable{
     public void setFacultad(Facultad facultad) {
         this.facultad = facultad;
     }
-    
-    
 
-
+    @Override
+    public String toString() {
+        return "Carrera{" + "idCarrera=" + idCarrera + ", nombre=" + nombre + ", asignaturas=" + asignaturas + ", facultad=" + facultad.getNombre() + '}';
+    }
+    
 }

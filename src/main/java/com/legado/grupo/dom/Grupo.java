@@ -9,8 +9,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name="grupos")
@@ -22,11 +20,12 @@ public class Grupo implements Serializable{
     
     private String nombre;
     
-    @OneToMany(mappedBy = "grupo")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "grupo")
     private List<Miembro> miembros;
+    
     @ManyToOne
     private Asignatura asignatura;
+    
     @ManyToOne
     private Periodo periodo;
 
@@ -34,10 +33,8 @@ public class Grupo implements Serializable{
     public Grupo() {
     }
 
-    public Grupo(String nombre, Periodo periodo, Asignatura asignatura) {
+    public Grupo(String nombre) {
         this.nombre = nombre;
-        this.periodo = periodo;
-        this.asignatura = asignatura;
         this.miembros=new ArrayList<>();
     }
     
@@ -91,6 +88,11 @@ public class Grupo implements Serializable{
     
     public void addMiembro(Miembro miembro){
         this.miembros.add(miembro); 
+    }
+
+    @Override
+    public String toString() {
+        return "Grupo{" + "idGrupo=" + idGrupo + ", nombre=" + nombre + ", miembros=" + miembros + ", asignatura=" + asignatura.getNombre() + ", periodo=" + periodo.getFechaInicio() + '}';
     }
     
     

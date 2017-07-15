@@ -68,6 +68,11 @@ public class Periodo implements Serializable {
     public void addGrupo(Grupo grupo){
         this.grupos.add(grupo);
     }
+
+    @Override
+    public String toString() {
+        return "Periodo{" + "idPeriodo=" + idPeriodo + ", fechaInicio=" + fechaInicio + ", grupos=" + grupos + '}';
+    }
     
     
     

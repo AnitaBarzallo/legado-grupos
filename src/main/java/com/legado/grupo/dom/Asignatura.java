@@ -15,11 +15,13 @@ public class Asignatura implements Serializable{
     private int idAsignatura;
     
     private String nombre;
+    
     @ManyToOne
     private Carrera carrera;
 
-    @OneToMany(mappedBy = "asignatura")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "asignatura")
     private List<Grupo> grupos;
+    
     public Asignatura() {
     }
     
@@ -69,6 +71,11 @@ public class Asignatura implements Serializable{
     
     public void addGrupo(Grupo grupo){
         this.grupos.add(grupo);
+    }
+
+    @Override
+    public String toString() {
+        return "Asignatura{" + "idAsignatura=" + idAsignatura + ", nombre=" + nombre + ", carrera=" + carrera.getNombre() + ", grupos=" + grupos + '}';
     }
     
     

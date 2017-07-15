@@ -7,6 +7,7 @@ package com.legado.grupo.dao;
 
 import com.legado.grupo.dao.I.Crud;
 import com.legado.grupo.dao.I.MiembroRepositorio;
+import com.legado.grupo.dom.Grupo;
 import com.legado.grupo.dom.Miembro;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,19 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class MiembroDAO implements Crud<Miembro> {
+
     @Autowired
     private MiembroRepositorio repositorio;
-    
-    public void agregar(Miembro miembro) {
-        repositorio.save(miembro);      
+
+    public void agregar(Miembro miembro, Grupo grupo) throws Exception {
+        if (grupo == null) {
+            throw new Exception("No se ha indicado el grupo del miembro con id " + miembro.getIdMiembro());
+        }
+        //Bidireccional: Un Miembro esta en un Grupo
+        grupo.addMiembro(miembro);
+        miembro.setGrupo(grupo);
+        
+        repositorio.save(miembro);
     }
 
     @Override
@@ -33,7 +42,7 @@ public class MiembroDAO implements Crud<Miembro> {
 
     @Override
     public void eliminarPorId(int id) {
-        if(existe(id)){
+        if (existe(id)) {
             repositorio.delete(id);
         }
     }
@@ -52,7 +61,5 @@ public class MiembroDAO implements Crud<Miembro> {
     public boolean existe(int id) {
         return repositorio.exists(id);
     }
-    
-
 
 }

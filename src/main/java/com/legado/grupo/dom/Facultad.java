@@ -74,5 +74,11 @@ public class Facultad implements Serializable{
     public void addCarrera(Carrera carrera){
         carreras.add(carrera);
     }
+
+    @Override
+    public String toString() {
+        return "Facultad{" + "idFacultad=" + idFacultad + ", nombre=" + nombre + ", carreras=" + carreras + '}';
+    }
             
+    
 }

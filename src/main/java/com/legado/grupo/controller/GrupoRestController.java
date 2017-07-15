@@ -41,4 +41,12 @@ public class GrupoRestController {
         return c;/**/
     }
     
+    
+    //Obtener Lista de todas las carreras que pertenecen a una facultad
+    @RequestMapping(value = "/get_lista_facultad", method = RequestMethod.GET)
+    public Carrera get_lista_facultad() {
+        logger.log(Level.INFO, "Peticion: localhost:9092/get_lista_facultad");
+        
+        return null;
+    }
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.legado.grupo.dao;
 
 import com.legado.grupo.dao.I.Crud;
@@ -14,11 +9,15 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class PeriodoDAO implements Crud<Periodo> {
+
     @Autowired
     private PeriodoRepositorio repositorio;
-    
-    public void agregar(Periodo periodo) {
-        repositorio.save(periodo);      
+
+    public void agregar(Periodo periodo) throws Exception {
+        if (existe(periodo)) {
+            throw new Exception("El periodo " + periodo.getFechaInicio().toGMTString() + " ya existe!");
+        }
+        repositorio.save(periodo);
     }
 
     @Override
@@ -33,7 +32,7 @@ public class PeriodoDAO implements Crud<Periodo> {
 
     @Override
     public void eliminarPorId(int id) {
-        if(existe(id)){
+        if (existe(id)) {
             repositorio.delete(id);
         }
     }
@@ -52,7 +51,14 @@ public class PeriodoDAO implements Crud<Periodo> {
     public boolean existe(int id) {
         return repositorio.exists(id);
     }
-    
 
+    private boolean existe(Periodo periodo) {
+        for(Periodo p : listar()){
+            if(p.getFechaInicio().equals(periodo.getFechaInicio())){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

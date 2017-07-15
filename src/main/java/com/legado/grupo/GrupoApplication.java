@@ -1,6 +1,5 @@
 package com.legado.grupo;
 
-
 import com.legado.grupo.dao.AsignaturaDAO;
 import com.legado.grupo.dao.CarreraDAO;
 import com.legado.grupo.dao.FacultadDAO;
@@ -21,7 +20,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class GrupoApplication implements CommandLineRunner {
-    
+
     @Autowired
     private FacultadDAO facuDAO;
     @Autowired
@@ -34,36 +33,39 @@ public class GrupoApplication implements CommandLineRunner {
     private MiembroDAO miemDAO;
     @Autowired
     private GrupoDAO grupoDAO;
-    
+
     public static void main(String[] args) {
-            SpringApplication.run(GrupoApplication.class, args);
+        SpringApplication.run(GrupoApplication.class, args);
     }
-    
+
     @Override
     public void run(String... strings) throws Exception {
-//        Facultad f=new Facultad("Arqui");
-//        Carrera c=new Carrera("Carrera100");
-//        Asignatura a=new Asignatura("Dibujo");
-//        f.addCarrera(c);
-//        c.addAsignatura(a);
-//        
-//        facuDAO.agregar(f);
-//        carreDAO.agregar(c, f);
-//        asigDAO.agregar(a, c);
-//        
-//        Periodo periodo =new Periodo(new Date());
-//        periDAO.agregar(periodo);
-//        
-//        Miembro miembro = new Miembro();
-//        miemDAO.agregar(miembro);
-//        
-//        Grupo grupo=new Grupo("Grupo1", periodo, a);
-//        grupo.addMiembro(miembro);
-//        
-//        grupoDAO.agregar(grupo, a, periodo);
-        System.out.println(asigDAO.buscarPorNombre("Dibujo").getIdAsignatura());
-        System.out.println(carreDAO.buscarPorNombre("Civil").getIdCarrera());
-        System.out.println(facuDAO.buscarPorNombre("Arqui").getIdFacultad());
-    }
+        Facultad facultad = new Facultad("Ingenieria");
+        Carrera carrera = new Carrera("Sistemas");
+        Asignatura asignatura = new Asignatura("Tecnologias Web");        
+        Periodo periodo = new Periodo(new Date());
+        Grupo grupo = new Grupo("Grupo1");
+        Miembro miembro = new Miembro();
         
+        facuDAO.agregar(facultad);
+        carreDAO.agregar(carrera, facultad);
+        asigDAO.agregar(asignatura, carrera);
+        periDAO.agregar(periodo);
+        grupoDAO.agregar(grupo, asignatura, periodo);
+        miemDAO.agregar(miembro,grupo);        
+        
+        System.out.println("Facultad:" + facuDAO.buscarPorNombre("Ingenieria").toString());
+        System.out.println("Carrera: " + carreDAO.buscarPorNombre("Sistemas").toString());
+        System.out.println("Asignatura: " + asigDAO.buscarPorNombre("Tecnologias Web").toString());
+        
+        //Facultad facultad = facuDAO.buscarPorNombre("Arqui");
+        //System.out.println(facultad.toString());
+        
+        //Grupo grupo = grupoDAO.buscarPorNombre("Grupo1");
+        //System.out.println(grupo.toString());
+        
+        //Asignatura asignatura = asigDAO.buscarPorNombre("Dibujo");
+        //System.out.println(asignatura.toString());
+    }
+
 }
