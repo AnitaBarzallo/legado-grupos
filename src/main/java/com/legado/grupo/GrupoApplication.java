@@ -12,7 +12,9 @@ import com.legado.grupo.dom.Facultad;
 import com.legado.grupo.dom.Grupo;
 import com.legado.grupo.dom.Miembro;
 import com.legado.grupo.dom.Periodo;
+import com.legado.grupo.srv.FacultadService;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -33,6 +35,7 @@ public class GrupoApplication implements CommandLineRunner {
     private MiembroDAO miemDAO;
     @Autowired
     private GrupoDAO grupoDAO;
+    
 
     public static void main(String[] args) {
         SpringApplication.run(GrupoApplication.class, args);
@@ -40,7 +43,7 @@ public class GrupoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        Facultad facultad = new Facultad("Ingenieria");
+        /*Facultad facultad = new Facultad("Ingenieria");
         Carrera carrera = new Carrera("Sistemas");
         Asignatura asignatura = new Asignatura("Tecnologias Web");        
         Periodo periodo = new Periodo(new Date());
@@ -56,7 +59,7 @@ public class GrupoApplication implements CommandLineRunner {
         
         System.out.println("Facultad:" + facuDAO.buscarPorNombre("Ingenieria").toString());
         System.out.println("Carrera: " + carreDAO.buscarPorNombre("Sistemas").toString());
-        System.out.println("Asignatura: " + asigDAO.buscarPorNombre("Tecnologias Web").toString());
+        System.out.println("Asignatura: " + asigDAO.buscarPorNombre("Tecnologias Web").toString());*/
         
         //Facultad facultad = facuDAO.buscarPorNombre("Arqui");
         //System.out.println(facultad.toString());
@@ -66,6 +69,11 @@ public class GrupoApplication implements CommandLineRunner {
         
         //Asignatura asignatura = asigDAO.buscarPorNombre("Dibujo");
         //System.out.println(asignatura.toString());
+        
+        List<Facultad> facultades = facuDAO.listar();
+        for(Facultad f : facultades){
+            System.out.println(f.toString());
+        }
     }
 
 }

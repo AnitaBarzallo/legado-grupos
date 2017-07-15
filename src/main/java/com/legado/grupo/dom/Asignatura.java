@@ -37,11 +37,11 @@ public class Asignatura implements Serializable{
 
     }
 
-    public int getIdAsignatura() {
+    public int getId_materia() {
         return id_materia;
     }
 
-    public void setIdAsignatura(int idAsignatura) {
+    public void setId_materia(int idAsignatura) {
         this.id_materia = idAsignatura;
     }
 

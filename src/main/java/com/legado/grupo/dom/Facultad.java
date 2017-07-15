@@ -43,11 +43,11 @@ public class Facultad implements Serializable{
         this.carreras = carreras;
     }
 
-    public int getIdFacultad() {
+    public int getId_facultad() {
         return id_facultad;
     }
 
-    public void setIdFacultad(int idFacultad) {
+    public void setId_facultad(int idFacultad) {
         this.id_facultad = idFacultad;
     }
 

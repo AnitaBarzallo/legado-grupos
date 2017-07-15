@@ -41,11 +41,11 @@ public class Periodo implements Serializable {
         this.fechaInicio = fechaInicio;
     }
 
-    public int getIdPeriodo() {
+    public int getId_periodo() {
         return id_periodo;
     }
 
-    public void setIdPeriodo(int idPeriodo) {
+    public void setId_periodo(int idPeriodo) {
         this.id_periodo = idPeriodo;
     }
 

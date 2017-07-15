@@ -28,11 +28,11 @@ public class Miembro implements Serializable {
         this.grupo=new Grupo();
     }
 
-    public int getIdMiembro() {
+    public int getId_miembro() {
         return id_usuario;
     }
 
-    public void setIdMiembro(int idMiembro) {
+    public void setId_miembro(int idMiembro) {
         this.id_usuario = idMiembro;
     }
 

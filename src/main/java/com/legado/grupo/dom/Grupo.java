@@ -46,11 +46,11 @@ public class Grupo implements Serializable{
         this.miembros=new ArrayList<>();
     }
 
-    public int getIdGrupo() {
+    public int getId_grupo() {
         return id_grupo;
     }
 
-    public void setIdGrupo(int idGrupo) {
+    public void setId_grupo(int idGrupo) {
         this.id_grupo = idGrupo;
     }
 

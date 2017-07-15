@@ -21,7 +21,7 @@ public class MiembroDAO implements Crud<Miembro> {
 
     public void agregar(Miembro miembro, Grupo grupo) throws Exception {
         if (grupo == null) {
-            throw new Exception("No se ha indicado el grupo del miembro con id " + miembro.getIdMiembro());
+            throw new Exception("No se ha indicado el grupo del miembro con id " + miembro.getId_miembro());
         }
         //Bidireccional: Un Miembro esta en un Grupo
         grupo.addMiembro(miembro);

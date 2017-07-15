@@ -41,11 +41,11 @@ public class Carrera implements Serializable{
         this.facultad=new Facultad();
     }
 
-    public int getIdCarrera() {
+    public int getId_carrera() {
         return id_carrera;
     }
 
-    public void setIdCarrera(int idCarrera) {
+    public void setId_carrera(int idCarrera) {
         this.id_carrera = idCarrera;
     }
 
