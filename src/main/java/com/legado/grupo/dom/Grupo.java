@@ -5,6 +5,7 @@
  */
 package com.legado.grupo.dom;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class Grupo implements Serializable{
     private String nombre;
     
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "grupo")
-    private List<Miembro> miembros;
+    @JsonIgnore private List<Miembro> miembros;
     
     @ManyToOne
     private Asignatura asignatura;
@@ -94,7 +95,5 @@ public class Grupo implements Serializable{
     public String toString() {
         return "Grupo{" + "idGrupo=" + id_grupo + ", nombre=" + nombre + ", miembros=" + miembros + ", asignatura=" + asignatura.getNombre() + ", periodo=" + periodo.getFechaInicio() + '}';
     }
-    
-    
     
 }

@@ -70,10 +70,10 @@ public class GrupoApplication implements CommandLineRunner {
         //Asignatura asignatura = asigDAO.buscarPorNombre("Dibujo");
         //System.out.println(asignatura.toString());
         
-        List<Facultad> facultades = facuDAO.listar();
+        /*List<Facultad> facultades = facuDAO.listar();
         for(Facultad f : facultades){
             System.out.println(f.toString());
-        }
+        }*/
     }
 
 }

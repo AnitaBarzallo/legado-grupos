@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.legado.grupo;
 
 import org.springframework.beans.BeansException;
@@ -25,10 +21,7 @@ import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
-/**
- *
- * @author helio
- */
+
 @Configuration
 public class MvcConfiguration extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 

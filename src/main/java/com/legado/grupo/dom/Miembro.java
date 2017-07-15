@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.legado.grupo.dom;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -15,10 +12,10 @@ import java.io.Serializable;
 public class Miembro implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-   
     private int id_usuario;
+    
     @ManyToOne
-    private Grupo grupo;
+    @JsonIgnore private Grupo grupo;
     
     public Miembro() {
     }
@@ -28,11 +25,11 @@ public class Miembro implements Serializable {
         this.grupo=new Grupo();
     }
 
-    public int getId_miembro() {
+    public int getId_usuario() {
         return id_usuario;
     }
 
-    public void setId_miembro(int idMiembro) {
+    public void setId_usuario(int idMiembro) {
         this.id_usuario = idMiembro;
     }
 
@@ -48,6 +45,5 @@ public class Miembro implements Serializable {
     public String toString() {
         return "Miembro{" + "idMiembro=" + id_usuario + ", grupo=" + grupo.getNombre() + '}';
     }
-    
-    
+  
 }
