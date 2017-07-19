@@ -11,9 +11,40 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" th:href="@{resources/css/estilo.css}">
     </head>
     <body>
-        <div>TODO write content</div>
-        <a href="/grupos">Grupos</a>
+       <div class="container">
+            <div class="header">
+                <img  class="logo_icono"src="resources/imagenes/logo_icono.png" > 
+                <img  class="logo_nombre"src="resources/imagenes/logo_nombre.png" >
+            </div>
+            <div class="padre">
+                <div class="hijo"> 
+                    <h2> Crear Grupos</h2>
+                    <form action="processFrom" method="post">
+                        <input type="text" name="namegrupo" id="idgrupo"/>
+                        <br>
+                        <select>
+                            <option value="facultad" id="idfacultad" >Seleccione una facultad</option>    
+                        </select>
+                        <br>
+                        <select>
+                            <option value="carrera" th:text="@{nombreCarrera}" id="idCarrera">Seleccione una Carrera</option>
+                        </select>
+                            <br>
+                        <select>
+                            <option value="asignatura" th:text="@{nombreAsignatura}" id="idAsignatura">Seleccione una Asignatura</option>
+                        </select>
+                                <br>
+                        <select>
+                            <option value="periodolectivo" th:text="@{periodoLectivo}">Periodolectivo</option>
+                        </select>                
+                        <br><br>
+                        <input type="submit" name="guardar" value="Crear Grupo">
+                    </form>
+                <div/>
+            </div>
+        </div>        
     </body>
 </html>

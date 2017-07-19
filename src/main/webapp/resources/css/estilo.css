@@ -1,0 +1,96 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12/07/2017, 12:41:23
+    Author     : elinoe
+*/
+html {
+  min-height: 100%;
+  position: relative;
+}
+body {
+  margin: 0;
+  margin-bottom: 40px;
+}
+
+div.header{
+    background-color: #32bebe;
+    text-align: left;
+    height: 60px;
+    width:100%;
+}
+div.padre{
+    width: auto;
+    height: 80%;
+    display: table;  
+    padding-top: 5%;
+    padding-left: 30%;
+
+}
+
+
+div.container{
+    position: absolute;
+    width: 100%;
+    height:100%;
+}
+
+h2{
+    text-align: center;
+    color: white;
+    font-size: 24px;
+
+}
+div.hijo{
+    
+    background-color: #32bebe;
+    height: 200px;
+    width: 400px;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 50px;
+
+}
+img.logo_nombre{
+    width: 100px;
+    left: 70px;
+    height: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+img.logo_icono{
+    width: 60px;
+    left: 0px;
+    top: 0px;
+    height: 60px;
+}    
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: grey;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 2px 2px 2px 2px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
