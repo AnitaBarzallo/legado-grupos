@@ -10,6 +10,7 @@ import com.legado.grupo.dao.GrupoDAO;
 import com.legado.grupo.dao.PeriodoDAO;
 import com.legado.grupo.dom.Asignatura;
 import com.legado.grupo.dom.Grupo;
+import com.legado.grupo.dom.Miembro;
 import com.legado.grupo.dom.Periodo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,4 +75,7 @@ public class GrupoService {
         return grupoDAO.listar();
     }
     
+    public List<Miembro> buscarMiembroGrupo(int idGrupo){
+        return buscarPorID(idGrupo).getMiembros();
+    }
 }

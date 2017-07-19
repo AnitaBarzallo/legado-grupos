@@ -9,6 +9,7 @@ import com.legado.grupo.dao.AsignaturaDAO;
 import com.legado.grupo.dao.CarreraDAO;
 import com.legado.grupo.dom.Asignatura;
 import com.legado.grupo.dom.Carrera;
+import com.legado.grupo.dom.Grupo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -33,6 +34,11 @@ public class AsignaturaService {
         asignaturaDAO.agregar(asignatura, carrera);
     }
     
+    public Asignatura buscarporID(int idAsignatura){
+       Asignatura asignatura=(Asignatura) asignaturaDAO.buscarPorID(idAsignatura);
+       return asignatura;
+   }
+    
    public Asignatura buscarporNombre(String idAsignatura){
        Asignatura asignatura=(Asignatura) asignaturaDAO.buscarPorNombre(idAsignatura);
        return asignatura;
@@ -56,6 +62,14 @@ public class AsignaturaService {
    
    public List<Asignatura> listarAsignaturas(){
        return asignaturaDAO.listar();
+   }
+   
+   public List<Grupo> listarGrupos(int idAsignatura){
+       return buscarporID(idAsignatura).getGrupos();
+   }
+
+   public List<Grupo> listarGrupos(String nombreAsignatura){
+       return buscarporNombre(nombreAsignatura).getGrupos();
    }
    
 }

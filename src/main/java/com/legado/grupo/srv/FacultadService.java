@@ -2,6 +2,7 @@
 package com.legado.grupo.srv;
 
 import com.legado.grupo.dao.FacultadDAO;
+import com.legado.grupo.dom.Carrera;
 import com.legado.grupo.dom.Facultad;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,11 @@ public class FacultadService {
         return facultadDAO.listar();
     }
     
+    public List<Carrera> carrerasFacultad(int idFacultad){
+        return buscarPorID(idFacultad).getCarreras();
+    }
     
+    public List<Carrera> carrerasFacultad(String nombreFacultad){
+        return buscarPorNombre(nombreFacultad).getCarreras();
+    }
 }

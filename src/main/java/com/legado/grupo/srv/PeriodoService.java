@@ -46,4 +46,8 @@ public class PeriodoService {
     public List<Periodo> listarPeriodos(){
         return periodoDAO.listar();
     }    
+    
+    public List<Grupo> listarGruposPeriodo(int idPeriodo){
+        return periodoDAO.buscarPorID(idPeriodo).getGrupos();
+    }
 }
