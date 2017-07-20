@@ -22,28 +22,45 @@ and open the template in the editor.
             <div class="padre">
                 <div class="hijo"> 
                     <h2> Crear Grupos</h2>
-                    <form action="processFrom" method="post">
-                        <input type="text" name="namegrupo" id="idgrupo"/>
-                        <br>
-                        <select>
-                            <option value="facultad" id="idfacultad" >Seleccione una facultad</option>    
+                    
+                    <!--Listar Facultades-->
+                    <!--tr th:each = "facultad : ${facultades}">
+                            <td th:text="${facultad.id_facultad}"></td>
+                            <td th:text="${facultad.nombre}"></td>
+                    </tr-->
+                                        
+                    
+                    <form method="post" action="agregar" role="form">
+                        <input type="text" id="nombreGrupo" name="nombreGrupo" placeholder="Nombre del grupo" />
+
+                        <!--Agregar facultades al combobox-->
+                        <select  id="ComboBoxFacultades" name="facultadSeleccionada" onChange="onstatechange(this)">
+                            <option value="-1">Seleccione la Facultad</option>
+                            <option th:each="facultad : ${facultades}" th:value="${facultad.id_facultad}" th:text="${facultad.nombre}"></option>
                         </select>
-                        <br>
-                        <select>
-                            <option value="carrera" th:text="@{nombreCarrera}" id="idCarrera">Seleccione una Carrera</option>
+                        
+                        <!--Agregar carreras al combobox-->
+                        <select  id="ComboBoxCarrera" name="xarreraSeleccionada" onChange="onstatechange(this)">
+                            <option value="-1">Seleccione la Carrera</option>
+                            <option th:each="carrera : ${carreras}" th:value="${carrera.id_carrera}" th:text="${carrera.nombre}"></option>
                         </select>
-                            <br>
-                        <select>
-                            <option value="asignatura" th:text="@{nombreAsignatura}" id="idAsignatura">Seleccione una Asignatura</option>
+                        
+                        <!--Agregar materias al combobox-->
+                        <select  id="ComboBoxAsignatura" name="asignaturaSeleccionada" onChange="onstatechange(this)">
+                            <option value="-1">Seleccione la Asignatura</option>
+                            <option th:each="materia : ${materias}" th:value="${materia.id_materia}" th:text="${materia.nombre}"></option>
                         </select>
-                                <br>
-                        <select>
-                            <option value="periodolectivo" th:text="@{periodoLectivo}">Periodolectivo</option>
-                        </select>                
-                        <br><br>
-                        <input type="submit" name="guardar" value="Crear Grupo">
+                        
+                        <!--Agregar periodos al combobox-->
+                        <select  id="ComboBoxAsignatura" name="periodoSeleccionado" onChange="onstatechange(this)">
+                            <option value="-1">Seleccione el periodo</option>
+                            <option th:each="periodo : ${periodos}" th:value="${periodo.id_periodo}" th:text="${periodo.fechaInicio}"></option>
+                        </select>
+                        
+                        <button type="submit" id="btnAgregarGrupo" >Agregar</button>
                     </form>
-                <div/>
+                    
+                </div>
             </div>
         </div>        
     </body>

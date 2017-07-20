@@ -12,12 +12,13 @@ import com.legado.grupo.dom.Grupo;
 import com.legado.grupo.dom.Periodo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author EdwinCabrera
  */
-
+@Service
 public class PeriodoService {
     @Autowired
     private PeriodoDAO periodoDAO;

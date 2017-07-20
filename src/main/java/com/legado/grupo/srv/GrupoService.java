@@ -14,12 +14,13 @@ import com.legado.grupo.dom.Miembro;
 import com.legado.grupo.dom.Periodo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 /**
  *
  * @author EdwinCabrera
  */
 
+@Service
 public class GrupoService {
     @Autowired
     private PeriodoDAO periodoDAO;

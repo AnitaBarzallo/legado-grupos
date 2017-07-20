@@ -12,11 +12,13 @@ import com.legado.grupo.dom.Carrera;
 import com.legado.grupo.dom.Grupo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author EdwinCabrera
  */
+@Service
 public class AsignaturaService {
     @Autowired
     private AsignaturaDAO asignaturaDAO;

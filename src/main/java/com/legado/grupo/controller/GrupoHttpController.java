@@ -5,29 +5,37 @@
  */
 package com.legado.grupo.controller;
 
+import com.legado.grupo.srv.*;
+import com.legado.grupo.dom.*;
+import com.legado.grupo.srv.GrupoService;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-/**
- *
- * @author helio
- */
+
 @Controller
 public class GrupoHttpController {
+    @Autowired
+    private FacultadService facultadSRV;     
+    @Autowired
+    private CarreraService carreraSRV; 
+    @Autowired
+    private AsignaturaService asignaturaSRV; 
+    @Autowired
+    private PeriodoService periodoSRV; 
+    @Autowired
+    private GrupoService grupoSrv;
+    
     private static final Logger logger = Logger.getLogger(GrupoHttpController.class.getName());
-    @RequestMapping("/")
-    public ModelAndView hello(HttpServletRequest request) {
-        logger.log(Level.INFO,request.getServletPath());
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("index");
-        return mv;
+    
+    @RequestMapping(value="", method=RequestMethod.GET)
+    public String index(Model model) {
+        return "index";
     }
     
     @RequestMapping("/grupos")
@@ -41,4 +49,34 @@ public class GrupoHttpController {
         mv.setViewName("grupos");
 	return mv;
     }
+    
+    @RequestMapping(value = "/agregar", method = RequestMethod.POST)
+    public ModelAndView agregarGrupo(@RequestParam("nombreGrupo") String nombreGrupo,
+                                @RequestParam("asignaturaSeleccionada") int idAsignatura,
+                                @RequestParam("periodoSeleccionado") int idPeriodo) throws Exception {
+        grupoSrv.agregarGrupo(nombreGrupo, idPeriodo, idAsignatura);
+        return new ModelAndView("index");
+    }
+    
+    @ModelAttribute("facultades")
+    public List<Facultad> listarFacultades(){
+        return facultadSRV.listarFacultades();
+    }
+    
+    @ModelAttribute("carreras")
+    public List<Carrera> listarCarreras(){
+        return carreraSRV.listarCarrera();
+    }
+    
+    @ModelAttribute("materias")
+    public List<Asignatura> listarMaterias(){
+        return asignaturaSRV.listarAsignaturas();
+    }
+    
+    @ModelAttribute("periodos")
+    public List<Periodo> listarPeriodos(){
+        return periodoSRV.listarPeriodos();
+    }
+    
+
 }
