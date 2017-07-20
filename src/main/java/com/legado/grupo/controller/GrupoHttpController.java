@@ -78,5 +78,22 @@ public class GrupoHttpController {
         return periodoSRV.listarPeriodos();
     }
     
+    
+    @ModelAttribute("listagrupos")
+    public List<Grupo> listaGrupos(){
+        return grupoSrv.listarGrupos();
+    }
+
+//    Aplicando ajax
+
+//    @RequestMapping(value = "/", method = RequestMethod.GET)
+//    public String refreshItem(@RequestParam("agregar") String orderId, Model model) {
+////    List<Grupo> list= Grupo.findItemsByOrder(idgrupo).getResull
+////        List<Item> itemList = Item.findItemsByOrderId(orderId).getResultList();
+////
+////    model.addAttribute("itemList", itemList);
+//
+//    return "myView :: #item";
 
 }
+
