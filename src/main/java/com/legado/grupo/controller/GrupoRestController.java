@@ -196,11 +196,15 @@ public class GrupoRestController {
             Miembro miembro = new Miembro(idUsuario);
 
             //Existe el usuario?
-            if (!miembroSRV.existe(idUsuario)) {
-                miembroSRV.agregar(miembro.getId_usuario(), grupo.getId_grupo());
-                jsonRespuesta.addProperty("estado", "ok");
-            } else {
-                jsonRespuesta.addProperty("estado", "existe");
+            if (grupo != null) {
+                if (!grupoSRV.existeMiembroEnGrupo(idUsuario, idGrupo)) {
+                    miembroSRV.agregar(miembro.getId_usuario(), grupo.getId_grupo());
+                    jsonRespuesta.addProperty("estado", "ok");
+                } else {
+                    jsonRespuesta.addProperty("estado", "existe");
+                }
+            } else{
+                jsonRespuesta.addProperty("estado", "error");
             }
         } catch (NumberFormatException ex) {
             logger.log(Level.INFO, ex.getClass().getSimpleName() + ": Se necesita un parametro numerico.");

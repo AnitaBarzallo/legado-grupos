@@ -125,4 +125,15 @@ public class GrupoService {
         gruposRespuesta = asignatura.getGrupos();
         return gruposRespuesta;
     }
+    
+    //Se verifica si un usuario esta en un grupo
+    public boolean existeMiembroEnGrupo(int idUsuario, int idGrupo){
+        Grupo grupo = grupoDAO.buscarPorID(idGrupo);
+        for(Miembro m : grupo.getMiembros()){
+            if(m.getId_usuario() == idUsuario){
+                return true;
+            }
+        }
+        return false;
+    }
 }
