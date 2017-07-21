@@ -45,7 +45,7 @@ public class GrupoApplication implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         /*Facultad facultad = new Facultad("Ingenieria");
         Carrera carrera = new Carrera("Sistemas");
-        Asignatura asignatura = new Asignatura("Tecnologias Web");        
+        Asignatura asignatura = new Asignatura("Tecnologias Web");     
         Periodo periodo = new Periodo(new Date());
         Grupo grupo = new Grupo("Grupo1");
         Miembro miembro = new Miembro();
@@ -74,6 +74,9 @@ public class GrupoApplication implements CommandLineRunner {
         for(Facultad f : facultades){
             System.out.println(f.toString());
         }*/
+        
+        /*asigDAO.agregar(new Asignatura("Mineria de Datos"), carreDAO.buscarPorNombre("Sistemas"));
+        grupoDAO.agregar(new Grupo("Grupo2"), asigDAO.buscarPorNombre("Mineria de Datos"), periDAO.buscarPorID(1));*/
     }
 
 }

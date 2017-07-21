@@ -52,4 +52,8 @@ public class FacultadService {
     public List<Carrera> carrerasFacultad(String nombreFacultad){
         return buscarPorNombre(nombreFacultad).getCarreras();
     }
+
+    public List<Facultad> listar() {
+        return facultadDAO.listar();
+    }
 }

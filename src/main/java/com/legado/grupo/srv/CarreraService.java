@@ -20,43 +20,44 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CarreraService {
+
     @Autowired
     private CarreraDAO carreraDAO;
     @Autowired
     private FacultadDAO facultadDAO;
 
-    public void agregarCarrera (String nombreCarrera,int idFacultad) throws Exception{
-        Carrera carrera=new Carrera(nombreCarrera);
-        Facultad facultad=facultadDAO.buscarPorID(idFacultad);
+    public void agregar(String nombreCarrera, int idFacultad) throws Exception {
+        Carrera carrera = new Carrera(nombreCarrera);
+        Facultad facultad = facultadDAO.buscarPorID(idFacultad);
         carreraDAO.agregar(carrera, facultad);
     }
-    
-    public void agregarCarrera (String nombreCarrera,String nombreFacultad) throws Exception{
-        Carrera carrera=new Carrera(nombreCarrera);
-        Facultad facultad=facultadDAO.buscarPorNombre(nombreFacultad);
+
+    public void agregar(String nombreCarrera, String nombreFacultad) throws Exception {
+        Carrera carrera = new Carrera(nombreCarrera);
+        Facultad facultad = facultadDAO.buscarPorNombre(nombreFacultad);
         carreraDAO.agregar(carrera, facultad);
     }
-    
-    public List<Carrera> listarCarrera(){
+
+    public List<Carrera> listar() {
         return carreraDAO.listar();
     }
-    
-    public Carrera buscarPorID(int idCarrera){
+
+    public Carrera buscarPorID(int idCarrera) {
         return carreraDAO.buscarPorID(idCarrera);
     }
-    
-    public Carrera buscarPorNombre(String nombreCarrera){
+
+    public Carrera buscarPorNombre(String nombreCarrera) {
         return carreraDAO.buscarPorNombre(nombreCarrera);
     }
-    
-    /** 
-     *Recupera una lista de asignaturas que posee una Carrera 
+
+    /* 
+     Recupera una lista de asignaturas que posee una Carrera 
      */
-    public List<Asignatura> asignaturasCarrera(int idCarrera){
+    public List<Asignatura> listarAsignaturasDeUnaCarrera(int idCarrera) {
         return buscarPorID(idCarrera).getAsignaturas();
     }
-    
-    public List<Asignatura> asignaturasCarrera(String nombreCarrera){
+
+    public List<Asignatura> listarAsignaturasDeUnaCarrera(String nombreCarrera) {
         return buscarPorNombre(nombreCarrera).getAsignaturas();
     }
 }

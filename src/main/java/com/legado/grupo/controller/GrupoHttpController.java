@@ -65,12 +65,12 @@ public class GrupoHttpController {
     
     @ModelAttribute("carreras")
     public List<Carrera> listarCarreras(){
-        return carreraSRV.listarCarrera();
+        return carreraSRV.listar();
     }
     
     @ModelAttribute("materias")
     public List<Asignatura> listarMaterias(){
-        return asignaturaSRV.listarAsignaturas();
+        return asignaturaSRV.listar();
     }
     
     @ModelAttribute("periodos")

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.legado.grupo.srv;
 
 import com.legado.grupo.dao.AsignaturaDAO;
@@ -14,10 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author EdwinCabrera
- */
+
 @Service
 public class AsignaturaService {
     @Autowired
@@ -26,13 +19,13 @@ public class AsignaturaService {
     @Autowired
     private CarreraDAO carreraDAO;
     
-    public void agregarAsignatura(String nombreAsignatura,String nombreCarrera) throws Exception{
+    public void agregar(String nombreAsignatura,String nombreCarrera) throws Exception{
         Carrera carrera=carreraDAO.buscarPorNombre(nombreCarrera);
         Asignatura asignatura=new Asignatura(nombreAsignatura);
         asignaturaDAO.agregar(asignatura, carrera);
     }
         
-    public void agregarAsignatura(Asignatura asignatura,Carrera carrera) throws Exception{
+    public void agregar(Asignatura asignatura,Carrera carrera) throws Exception{
         asignaturaDAO.agregar(asignatura, carrera);
     }
     
@@ -46,7 +39,7 @@ public class AsignaturaService {
        return asignatura;
    }
    
-   public void actualizarAsignatura(int idAsignatura,String nombreAsignatura,String nombreCarrera){
+   public void actualizar(int idAsignatura,String nombreAsignatura,String nombreCarrera){
        Asignatura asignatura=asignaturaDAO.buscarPorID(idAsignatura);
        Carrera carrera=carreraDAO.buscarPorNombre(nombreCarrera);
        asignatura.setNombre(nombreAsignatura);
@@ -54,7 +47,7 @@ public class AsignaturaService {
        asignaturaDAO.actualizar(asignatura);
    }
    
-   public void eliminarAsignatura(int id){
+   public void eliminar(int id){
        asignaturaDAO.eliminarPorId(id);
    }
    
@@ -62,7 +55,7 @@ public class AsignaturaService {
         asignaturaDAO.eliminarTodo();
     }
    
-   public List<Asignatura> listarAsignaturas(){
+   public List<Asignatura> listar(){
        return asignaturaDAO.listar();
    }
    
@@ -73,5 +66,9 @@ public class AsignaturaService {
    public List<Grupo> listarGrupos(String nombreAsignatura){
        return buscarporNombre(nombreAsignatura).getGrupos();
    }
+
+    public Asignatura buscarPorID(int idMateria) {
+        return asignaturaDAO.buscarPorID(idMateria);
+    }
    
 }
