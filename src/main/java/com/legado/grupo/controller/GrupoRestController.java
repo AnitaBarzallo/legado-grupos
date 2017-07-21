@@ -1,5 +1,6 @@
 package com.legado.grupo.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.legado.grupo.dom.Asignatura;
@@ -14,11 +15,16 @@ import com.legado.grupo.srv.FacultadService;
 import com.legado.grupo.srv.GrupoService;
 import com.legado.grupo.srv.MiembroService;
 import com.legado.grupo.srv.PeriodoService;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -90,7 +96,14 @@ public class GrupoRestController {
             Grupo grupo = grupoSRV.buscarPorID(idGrupo);
             if (grupo != null) {
                 for (Miembro m : grupo.getMiembros()) {
-                    usuarios.add(GrupoRestClient.get_usuario(m.getId_usuario()));
+                    try {
+                        Usuario u = GrupoRestClient.get_usuario(m.getId_usuario());
+                        if (u != null) {
+                            usuarios.add(u);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } catch (NumberFormatException ex) {
@@ -140,7 +153,7 @@ public class GrupoRestController {
     public String get_grupos_usuario(@RequestParam String id_carrera, String id_materia) {
         logger.log(Level.INFO, "GET: " + URL_LEGADO_GRUPOS + "/buscar_grupos?id_carrera=" + id_carrera + "&id_materia=" + id_materia);
 
-        String jsonRespuesta = "[]";
+        String jsonRespuesta = "[{}]";
         try {
             int idCarrera = Integer.parseInt(id_carrera);
             int idMateria = Integer.parseInt(id_materia);

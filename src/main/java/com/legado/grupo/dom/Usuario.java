@@ -1,8 +1,10 @@
 
 package com.legado.grupo.dom;
 
+import java.io.Serializable;
 
-public class Usuario {
+
+public class Usuario implements Serializable {
     private int id_usuario;
     private String alias;
     private String nombre;
@@ -13,6 +15,10 @@ public class Usuario {
         this.alias = alias;
         this.nombre = nombre;
         this.correo = correo;
+    }
+    
+    public Usuario(){
+        
     }
 
     public int getId_usuario() {
