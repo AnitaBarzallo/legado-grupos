@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html xmlns="http://www.w3.org/1999/xhtml"
           xmlns:th="http://www.thymeleaf.org"
           xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
@@ -14,9 +10,12 @@ and open the template in the editor.
        
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>            
-       <link rel="stylesheet" type="text/css" th:href="@{resources/css/estilo.css}"/>
-            
+        <link rel="stylesheet" type="text/css" th:href="@{resources/css/estilo.css}"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/css/bootstrapValidator.min.cs" rel="stylesheet">
+        <!--javascript-->
+        <link href="resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet">      
     </head>
+    
     <body>
        <header>
             <div class="container-fluid">
@@ -25,114 +24,217 @@ and open the template in the editor.
             </div>
         </header>
         
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12" style="height: 30px">  </div>
+        <!--Boton listar-->
+       
+       <div>
+       </div>
+        
+         <!--Form de ingreso de datos del grupo--> 
+        <div class="container" style="top: 220px"  >
+            <div class="panel center-block" style="width:50% ">
+                <!--encabezado--> 
+                <div class="panel-heading">Crear Grupos</div>
+                
+                <!--<div class="form-group row">-->
+                <div class="panel-body ">   
+                    <form class="form-horizontal" method="post" action="agregar" role="form" id="formgrupo">
+                        
+                        <div class="input-group col-md-12"> 
+                            <input class="form-control"  type="text" id="nombreGrupo1" name="nombreGrupo" placeholder="Nombre del grupo"/>
+                        </div> 
+                        <br>
+                            
+                        <!--Agregar Facultades-->    
+                        <div class="input-group col-md-12">    
+                            <select class="selectpicker form-control show-tick" id="ComboBoxFacultades" name="facultadSeleccionada" onChange="onstatechange(this)">
+                                <option value="-1" title="Elija la facultad"></option>
+                                <option th:each="facultad : ${facultades}" th:value="${facultad.id_facultad}" th:text="${facultad.nombre}"></option>   
+                            </select> 
+                        </div>
+                        
+                        <br> 
+
+                         <!--Agregar Carrera-->
+                        <div class="input-group">    
+                            <select class="form-control col-md-12" id="ComboBoxCarrera" name="xarreraSeleccionada" onChange="onstatechange(this)">
+                                <option value="-1">Seleccione la Carrera</option>
+                                <option th:each="carrera : ${carreras}" th:value="${carrera.id_carrera}" th:text="${carrera.nombre}"></option>    
+                            </select>
+                            <div class="input-group-btn">
+                                <a href="#ventana2"class="btn btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></a>         
+                            </div>
+                        </div>
+                        <br>
+                        <!--Agregar Asignatura-->
+                       <div class="input-group">    
+                           <select class="form-control col-md-12" id="ComboBoxAsignatura" name="asignaturaSeleccionada" onChange="onstatechange(this)">
+                               <option value="-1">Seleccione la Asignatura</option>
+                               <option th:each="materia : ${materias}" th:value="${materia.id_materia}" th:text="${materia.nombre}"></option>
+                           </select>
+                           <div class="input-group-btn">
+                               <!--<button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>-->
+                               <a href="#ventana3"class="btn btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></a> 
+                           </div>
+                       </div>
+                        <br>
+                        <!--Agregar periodo academico-->
+                       <div class="input-group">    
+                           <select class="form-control col-md-12" id="ComboBoxAsignatura" name="periodoSeleccionado" onChange="onstatechange(this)">
+                               <option value="-1">Seleccione el periodo</option>
+                               <option th:each="periodo : ${periodos}" th:value="${periodo.id_periodo}" th:text="${periodo.fechaInicio}" readonly></option>
+                           </select>
+                          <div class="input-group-btn">
+                               <!--<button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>-->
+                               <a href="#ventana4"class="btn btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></a> 
+                           </div>
+                       </div>  
+                        <!--pie del panel--> 
+                        <div class="panel-footer">
+                            <button type="submit" class="btn btn-primary" id="btnAgregarGrupo"> <span class="glyphicon glyphicon-floppy-saved"></span> Agregar</button>                                      
+                        </div> 
+                    </form> 
+                </div>                            
             </div>
-                    
-                    <!--Listar Facultades-->
-                    <!--tr th:each = "facultad : ${facultades}">
-                            <td th:text="${facultad.id_facultad}"></td>
-                            <td th:text="${facultad.nombre}"></td>
-                    </tr-->
-                    
-            <div class="row">
-                <div class="col-md-12" style="height: 50px">
-                    <div class=" container bd-success">
-                        <a href="#ventana1"class="btn btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span>Crear grupo nuevo</a>                         
-                        <div class="modal fade" id="ventana1">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <!--header de la ventana-->
-                                        <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h3 class="modal-title">  Crear Grupo </h3>
-                                       
-                                    </div>
-                                    
-                                     <!--contenido de la ventana-->
-                                    <div class="modal-body">                                                                                                    
-                                            <form class="form-horizontal" method="post" action="agregar" role="form">
-                                                <input class="form-control"  type="text" id="nombreGrupo" name="nombreGrupo" placeholder="Nombre del grupo"/>
-                                                <br>
-                                                 <!--Agregar Facultades-->   
-                                                <div class="input-group">    
-                                                    <select class="form-control" id="ComboBoxFacultades" name="facultadSeleccionada" onChange="onstatechange(this)">
-                                                        <option value="-1">Seleccione la Facultad</option>
-                                                        <option th:each="facultad : ${facultades}" th:value="${facultad.id_facultad}" th:text="${facultad.nombre}"></option>   
-                                                    </select>
-                                                    <div class="input-group-btn">
-                                                        <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
-                                                    </div>
-                                                </div>
-                                                    <br>
-                                                 <!--Agregar Carrera-->
-                                                <div class="input-group">    
-                                                    <select class="form-control" id="ComboBoxCarrera" name="xarreraSeleccionada" onChange="onstatechange(this)">
-                                                        <option value="-1">Seleccione la Carrera</option>
-                                                        <option th:each="carrera : ${carreras}" th:value="${carrera.id_carrera}" th:text="${carrera.nombre}"></option>    
-                                                    </select>
-                                                    <div class="input-group-btn">
-                                                        <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
-                                                    </div>
-                                                </div>
-                                                 <br>
-                                                 <!--Agregar Asignatura-->
-                                                <div class="input-group">    
-                                                    <select class="form-control" id="ComboBoxAsignatura" name="asignaturaSeleccionada" onChange="onstatechange(this)">
-                                                        <option value="-1">Seleccione la Asignatura</option>
-                                                        <option th:each="materia : ${materias}" th:value="${materia.id_materia}" th:text="${materia.nombre}"></option>
-                                                    </select>
-                                                    <div class="input-group-btn">
-                                                        <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
-                                                    </div>
-                                                </div>
-                                                 <br>
-                                                 <!--Agregar periodo academico-->
-                                                <div class="input-group">    
-                                                    <select class="form-control" id="ComboBoxAsignatura" name="periodoSeleccionado" onChange="onstatechange(this)">
-                                                        <option value="-1">Seleccione el periodo</option>
-                                                        <option th:each="periodo : ${periodos}" th:value="${periodo.id_periodo}" th:text="${periodo.fechaInicio}"></option>
-                                                    </select>
-                                                    <div class="input-group-btn">
-                                                        <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
-                                                    </div>
-                                                </div>                                                   
-                                    
-                                    </div>
-                  
-                                                <div class="modal-footer">
-                                                    <!--Pie de pagina-->
-                                                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-                                                    <button type="submit" class="btn btn-primary" id="btnAgregarGrupo"> <span class="glyphicon glyphicon-floppy-saved"></span> Agregar</button>                                      
-                                                </div> 
-                                     </form>  
+        </div>
+ 
+        
+        <!--Boton listar-->
+       
+        <div class="container">
+            <div class="col-md-12" >
+                <div class=" container  center-block">
+                    <a href="#ventanaListar"class="btn btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span>Listar Grupos</a>                         
+                </div>
+            </div>
+        </div>    
+        <!--//////////////////////////////////////////////////////////////////////////////////////////////////////-->    
+            
+        <!--ventana de listado de cursos-->
+                <div class="modal fade" id="ventanaListar">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">  Listado de Grupos </h3>               
+                            </div>
+                             <!--contenido de la ventana-->
+                            <div class="modal-body"> 
+                                <div class="input-group">
+                                    <a href="#" class="list-group-item" th:each="listagrupos:${listagrupos}" th:value="${listagrupos}" th:text="${listagrupos}"></a>
                                 </div>
+                            </div>
+                            <div class="modal-footer">
+                                <!--Pie de pagina-->
+                                <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cerrar</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>                    
-                    
-                   
+                 
+        <!--//////////////////////////////////////////////////////////////////////////////////////////////////////-->    
+      
+        <!--Ventana de agregar carrera-->
+            <div class="modal fade" id="ventana2">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!--header de la ventana-->
+                            <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title"> Agregar Carrrera </h4>               
+                        </div>
+                         <!--contenido de la ventana-->
+                        <div class="modal-body">                                                                                                   
+                            <form class="form-horizontal" method="post" action="agregarCarrera" role="form" id="formCurso"
+                                 <!--Agregar facultades-->
+                                <div class="input-group col-md-12">    
+                                    <select class="form-control" id="ComboBoxFacultades" name="facultadSeleccionada" onChange="onstatechange(this)">
+                                        <option value="-1">Seleccione la Facultad</option>
+                                        <option th:each="facultad : ${facultades}" th:value="${facultad.id_facultad}" th:text="${facultad.nombre}"></option>   
+                                    </select>
+                                </div>
+                                <br>
+                                
+                                <input class="form-control"  type="text" id="nuevoCurso" name="agregarCarrera" placeholder="Nombre de la asignatura"/>
+                                <br><br>
+                                <button type="submit" class="btn btn-primary" id="btnAgregarGrupo"> <span class="glyphicon glyphicon-floppy-saved" data-dismiss="modal"></span> Agregar</button>                                      
+                                <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>       
+        
+        <!--Ventana de agregar asignatura-->
+            <div class="modal fade" id="ventana3">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!--header de la ventana-->
+                            <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title"> Agregar Gurso </h4>               
+                        </div>
+                         <!--contenido de la ventana-->
+                        <div class="modal-body"> 
+                            
+                            <form class="form-horizontal" method="post" action="agregar" role="form" id="formAsignatura">
+                               
+                                <input class="form-control"  type="text" id="nuevoCurso" name="agregarCurso" placeholder="Nombre del curso"/>
+                                <br><br>
+                                <button type="submit" class="btn btn-primary" id="btnAgregarGrupo"> <span class="glyphicon glyphicon-floppy-saved"></span> Agregar</button>                                      
+                                <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>       
+   
+         <!--Ventana Agregar fecha-->
+            <div class="modal fade" id="ventana4">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!--header de la ventana-->
+                            <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title"> Agregar Periodo Academico </h4>               
+                        </div>
+                         <!--contenido de la ventana-->
+                        <div class="modal-body">                                                                                                    
+                            <div class='input-group date' id='divMiCalendario'>
+                                <input type='text' id="txtFecha" class="form-control"/>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                            <br><br>
+                                <button type="submit" class="btn btn-primary" id="btnAgregarGrupo"> <span class="glyphicon glyphicon-floppy-saved"></span> Agregar</button>                                      
+                                <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>     
+                        </div>
+                    </div>
+                </div>
+            </div>       
+   
         <!--Pantalla principal-->
          <div class="container">                
-                <div class="col-lg-8">
-                    <div class="input-group">
-                        <a href="#" class="list-group-item" th:each="listagrupos:${listagrupos}" th:value="${listagrupos}" th:text="${listagrupos}">Grupo 1</a>
-<!--                        <div class="input-group-btn" th:each="listagrupos:${listagrupos}">
-                            <button class="btn btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
-                            <button class="btn btn-primary" ><span class="glyphicon glyphicon-pencil"></span></button>         
-                           <br><br>
-                        </div> /btn-group -->
-                        <br>
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-6 -->         
-        </div>  
+                    
+        </div>
+        
     </div>
+   
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-            
-                
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/language/es_ES.min.js"></script>        
+    <script type="text/javascript" src="resources/js/validacion.js"></script>
+    
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <script src="resources/js/moment.min.js"></script>
+   <script src="resources/js/bootstrap-datetimepicker.min.js"></script>
+   <script src="resources/js/bootstrap-datetimepicker.es.js"></script>
+   <script type="text/javascript">
+        $('#divMiCalendario').datetimepicker({
+              format: 'YYYY-MM-DD'       
+        });
+        $('#divMiCalendario').data("DateTimePicker").show();
+   </script>
+    
     </body>
 </html>

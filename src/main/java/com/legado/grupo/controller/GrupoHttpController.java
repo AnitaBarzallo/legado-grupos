@@ -58,6 +58,24 @@ public class GrupoHttpController {
         return new ModelAndView("index");
     }
     
+//    Crear una carrera nueva
+    @RequestMapping(value = "/agregarCarrera", method = RequestMethod.POST)
+    public ModelAndView agregarCarrera(@RequestParam("agregarCarrera") String nombreCarrera,
+            @RequestParam("facultadSeleccionada") int idfacultad) throws Exception {
+        
+        carreraSRV.agregar(nombreCarrera, idfacultad);
+        return new ModelAndView("index");
+    }
+//    
+////    Agregar una nueva asignatura
+//    @RequestMapping(value = "", method = RequestMethod.POST)
+//    public ModelAndView agregarAsignatura(@RequestParam("agregarAsignatura") String nombreAsignatura,
+//        @RequestParam("agregarCarrera") String nombreCarrera) throws Exception {
+//        asignaturaSRV.agregar(nombreAsignatura, nombreCarrera);
+//        return new ModelAndView("index");
+//    }
+    
+    
     @ModelAttribute("facultades")
     public List<Facultad> listarFacultades(){
         return facultadSRV.listarFacultades();
