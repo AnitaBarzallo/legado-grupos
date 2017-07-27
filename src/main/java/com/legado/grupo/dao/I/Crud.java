@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package com.legado.grupo.dao.I;
-
+//librerias
 import java.util.List;
+//fin librerias
 
+//creamos los metodos para realizar un CRUD
 public interface Crud<T> {
       
     public T buscarPorID(int id);

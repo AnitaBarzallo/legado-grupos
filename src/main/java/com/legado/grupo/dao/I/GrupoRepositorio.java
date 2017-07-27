@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package com.legado.grupo.dao.I;
+//librerias
 import com.legado.grupo.dom.Grupo;
 import org.springframework.data.repository.CrudRepository;
-
+//fin librerias
+//creamos los metodos para buscar por nombre hereda de CrudRepository
 public interface GrupoRepositorio extends CrudRepository<Grupo, Integer>{
     Grupo findByNombre(String nombre);
 }

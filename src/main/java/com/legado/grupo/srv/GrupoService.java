@@ -99,6 +99,7 @@ public class GrupoService {
         return grupoDAO.listar();
     }
     
+    //metodo q retorna una lista de grupos
     public List<Grupo> buscar(int... idGrupos) {
         List<Grupo> lista = new ArrayList<>();
         Grupo grupo;
