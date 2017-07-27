@@ -1,5 +1,6 @@
 package com.legado.grupo.controller;
 //librerias
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -32,8 +33,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 //fin librerias
+
 @RestController
 public class GrupoRestController {
+
     // aributos globales
     @Autowired
     private FacultadService facultadSRV;
@@ -48,9 +51,11 @@ public class GrupoRestController {
     @Autowired
     private MiembroService miembroSRV;
 
+    private String URL_LEGADO_USUARIOS = "172.16.147.108:9091";
     private String URL_LEGADO_GRUPOS = "localhost:9092";
 
     private static final Logger logger = Logger.getLogger(RestController.class.getName());
+
     // fin atributos globales
     /*
     Obtener Lista de todas las carreras que pertenecen a una facultad
@@ -88,16 +93,18 @@ public class GrupoRestController {
      */
     @RequestMapping(value = "/get_miembros", method = RequestMethod.GET)
     public List<Usuario> get_miembros(@RequestParam String id_grupo) {
-        logger.log(Level.INFO, "GET: " + URL_LEGADO_GRUPOS + "/get_miembros?id_grupo=" + id_grupo);
+        logger.log(Level.INFO, "GET: " + URL_LEGADO_USUARIOS + "/get_miembros?id_grupo=" + id_grupo);
 
         List<Usuario> usuarios = new ArrayList<>();//creamos lista de usarios tipo Usuario
         try {
             int idGrupo = Integer.parseInt(id_grupo);//casting a id grupo
             Grupo grupo = grupoSRV.buscarPorID(idGrupo);
             if (grupo != null) {// si existe el grupo entonces buscara a sus integrantes
+                ObjectMapper mapper = new ObjectMapper();
                 for (Miembro m : grupo.getMiembros()) {
                     try {//manejode errores
-                        Usuario u = GrupoRestClient.get_usuario(m.getId_usuario());
+                        String url = "http://" + URL_LEGADO_USUARIOS + "/get_usuario?id_usuario=" + m.getId_usuario();
+                        Usuario u = mapper.readValue(new URL(url), Usuario[].class)[0];
                         if (u != null) {//si el usuario existe es agregado
                             usuarios.add(u);
                         }
@@ -203,7 +210,7 @@ public class GrupoRestController {
                 } else {
                     jsonRespuesta.addProperty("estado", "existe");//mensaje de usuario enconrado
                 }
-            } else{
+            } else {
                 jsonRespuesta.addProperty("estado", "error");//respuesta de error
             }
         } catch (NumberFormatException ex) {//validacion de numeros
