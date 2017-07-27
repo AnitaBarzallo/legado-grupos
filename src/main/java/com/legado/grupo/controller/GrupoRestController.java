@@ -1,5 +1,5 @@
 package com.legado.grupo.controller;
-
+//librerias
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -31,10 +31,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
+//fin librerias
 @RestController
 public class GrupoRestController {
-
+    // aributos globales
     @Autowired
     private FacultadService facultadSRV;
     @Autowired
@@ -51,15 +51,15 @@ public class GrupoRestController {
     private String URL_LEGADO_GRUPOS = "localhost:9092";
 
     private static final Logger logger = Logger.getLogger(RestController.class.getName());
-
+    // fin atributos globales
     /*
     Obtener Lista de todas las carreras que pertenecen a una facultad
      */
     @RequestMapping(value = "/get_lista_facultad", method = RequestMethod.GET)
     public List<Facultad> get_lista_facultad() {
         logger.log(Level.INFO, "GET: " + URL_LEGADO_GRUPOS + "/get_lista_facultad");
-        List<Facultad> facultades = facultadSRV.listar();
-        return facultades;
+        List<Facultad> facultades = facultadSRV.listar();//se carga lista de facultades
+        return facultades;// retorna lista de facultades
     }
 
     /*
@@ -72,14 +72,14 @@ public class GrupoRestController {
         List<Asignatura> materias = new ArrayList<>();
         try {
             int idCarrera = Integer.parseInt(id_carrera);
-            Carrera carrera = carreraSRV.buscarPorID(idCarrera);
-            if (carrera != null) {
+            Carrera carrera = carreraSRV.buscarPorID(idCarrera);//se busca una carrera por id
+            if (carrera != null) {// si no es vacio se cargan las materias
                 materias = carrera.getAsignaturas();
             }
         } catch (NumberFormatException ex) {
             logger.log(Level.INFO, ex.getClass().getSimpleName() + ": Se necesita un parametro numerico.");
         } finally {
-            return materias;
+            return materias;//devuelve lista de materias
         }
     }
 
@@ -90,15 +90,15 @@ public class GrupoRestController {
     public List<Usuario> get_miembros(@RequestParam String id_grupo) {
         logger.log(Level.INFO, "GET: " + URL_LEGADO_GRUPOS + "/get_miembros?id_grupo=" + id_grupo);
 
-        List<Usuario> usuarios = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();//creamos lista de usarios tipo Usuario
         try {
-            int idGrupo = Integer.parseInt(id_grupo);
+            int idGrupo = Integer.parseInt(id_grupo);//casting a id grupo
             Grupo grupo = grupoSRV.buscarPorID(idGrupo);
-            if (grupo != null) {
+            if (grupo != null) {// si existe el grupo entonces buscara a sus integrantes
                 for (Miembro m : grupo.getMiembros()) {
-                    try {
+                    try {//manejode errores
                         Usuario u = GrupoRestClient.get_usuario(m.getId_usuario());
-                        if (u != null) {
+                        if (u != null) {//si el usuario existe es agregado
                             usuarios.add(u);
                         }
                     } catch (IOException e) {
@@ -109,7 +109,7 @@ public class GrupoRestController {
         } catch (NumberFormatException ex) {
             logger.log(Level.INFO, ex.getClass().getSimpleName() + ": Se necesita un parametro numerico.");
         } finally {
-            return usuarios;
+            return usuarios;//retorna la lista de usuarios
         }
     }
 
@@ -121,21 +121,21 @@ public class GrupoRestController {
         logger.log(Level.INFO, "GET: " + URL_LEGADO_GRUPOS + "/get_grupos_usuario?id_usuario=" + id_usuario);
 
         String jsonRespuesta = "[]";
-        try {
+        try {//control de excepciones
             int idUsuario = Integer.parseInt(id_usuario);
 
             //Se buscan los grupos y se prepara el JSON de respuesta
-            JsonArray jsonArray = new JsonArray();
+            JsonArray jsonArray = new JsonArray();//array de objetos json
             for (Grupo g : grupoSRV.listarGruposDeUnUsuario(idUsuario)) {
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("id_grupo", g.getId_grupo());
+                jsonObject.addProperty("id_grupo", g.getId_grupo());//se agregan propiedades al objeto json
                 jsonObject.addProperty("nombre", g.getNombre());
                 jsonObject.addProperty("materia", g.getAsignatura().getNombre());
                 jsonObject.addProperty("carrera", g.getAsignatura().getCarrera().getNombre());
                 jsonObject.addProperty("facultad", g.getAsignatura().getCarrera().getFacultad().getNombre());
                 jsonObject.addProperty("periodo_academico", g.getPeriodo().getFechaInicio().toGMTString());
 
-                jsonArray.add(jsonObject);
+                jsonArray.add(jsonObject);//se agrega el objeto json a un array
             }
 
             jsonRespuesta = jsonArray.toString();
@@ -154,59 +154,59 @@ public class GrupoRestController {
         logger.log(Level.INFO, "GET: " + URL_LEGADO_GRUPOS + "/buscar_grupos?id_carrera=" + id_carrera + "&id_materia=" + id_materia);
 
         String jsonRespuesta = "[{}]";
-        try {
-            int idCarrera = Integer.parseInt(id_carrera);
+        try {//control de excepciones
+            int idCarrera = Integer.parseInt(id_carrera);//castings
             int idMateria = Integer.parseInt(id_materia);
 
             //Se buscan los grupos y se prepara el JSON de respuesta
             JsonArray jsonArray = new JsonArray();
             for (Grupo g : grupoSRV.listarGruposSegunAsignaturaYCarrera(idMateria, idCarrera)) {
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("id_grupo", g.getId_grupo());
+                jsonObject.addProperty("id_grupo", g.getId_grupo());//se agrega propiedades del grupo
                 jsonObject.addProperty("nombre", g.getNombre());
                 jsonObject.addProperty("materia", g.getAsignatura().getNombre());
                 jsonObject.addProperty("carrera", g.getAsignatura().getCarrera().getNombre());
                 jsonObject.addProperty("facultad", g.getAsignatura().getCarrera().getFacultad().getNombre());
                 jsonObject.addProperty("periodo_academico", g.getPeriodo().getFechaInicio().toGMTString());
 
-                jsonArray.add(jsonObject);
+                jsonArray.add(jsonObject);//agregamos el objeo al array
             }
 
-            jsonRespuesta = jsonArray.toString();
+            jsonRespuesta = jsonArray.toString();//tranformamos a string el array
         } catch (NumberFormatException ex) {
             logger.log(Level.INFO, ex.getClass().getSimpleName() + ": Se necesita un parametro numerico.");
         } finally {
-            return jsonRespuesta;
+            return jsonRespuesta;// retornamos el array en forma de string
         }
     }
 
     /*
-    Ingresar un usuario en un grupo
+    Ingresar un usuario en un grupo, metodo GET
      */
     @RequestMapping(value = "/add_miembro", method = RequestMethod.GET)
     public String add_miembro(@RequestParam String id_usuario, String id_grupo) {
         logger.log(Level.INFO, "GET: " + URL_LEGADO_GRUPOS + "/add_miembro?id_usuario=" + id_usuario + "&id_grupo=" + id_grupo);
 
-        JsonObject jsonRespuesta = new JsonObject();
-        try {
-            int idUsuario = Integer.parseInt(id_usuario);
+        JsonObject jsonRespuesta = new JsonObject();// creamos un objeto json
+        try {//control de excepciones
+            int idUsuario = Integer.parseInt(id_usuario);//casting a los parametros
             int idGrupo = Integer.parseInt(id_grupo);
 
-            Grupo grupo = grupoSRV.buscarPorID(idGrupo);
+            Grupo grupo = grupoSRV.buscarPorID(idGrupo);//instancia de grupo y miembro
             Miembro miembro = new Miembro(idUsuario);
 
             //Existe el usuario?
-            if (grupo != null) {
+            if (grupo != null) {//si existe un grupo ingresa 
                 if (!grupoSRV.existeMiembroEnGrupo(idUsuario, idGrupo)) {
-                    miembroSRV.agregar(miembro.getId_usuario(), grupo.getId_grupo());
-                    jsonRespuesta.addProperty("estado", "ok");
+                    miembroSRV.agregar(miembro.getId_usuario(), grupo.getId_grupo());//agregamos el miembro en caso de no existir
+                    jsonRespuesta.addProperty("estado", "ok");//mensaje de confirmacion
                 } else {
-                    jsonRespuesta.addProperty("estado", "existe");
+                    jsonRespuesta.addProperty("estado", "existe");//mensaje de usuario enconrado
                 }
             } else{
-                jsonRespuesta.addProperty("estado", "error");
+                jsonRespuesta.addProperty("estado", "error");//respuesta de error
             }
-        } catch (NumberFormatException ex) {
+        } catch (NumberFormatException ex) {//validacion de numeros
             logger.log(Level.INFO, ex.getClass().getSimpleName() + ": Se necesita un parametro numerico.");
             jsonRespuesta.addProperty("estado", "error");
         } catch (Exception ex) {
@@ -225,7 +225,7 @@ public class GrupoRestController {
         logger.log(Level.INFO, "GET: " + URL_LEGADO_GRUPOS + "/get_grupo?id_grupo=" + id_grupo);
 
         String jsonRespuesta = "[]";
-        try {
+        try {//control de excepciones
             //Se separan los ids pasados como parametro
             String[] s_ids = id_grupo.split(",");
             int[] ids = new int[s_ids.length];
@@ -244,14 +244,14 @@ public class GrupoRestController {
                 jsonObject.addProperty("facultad", g.getAsignatura().getCarrera().getFacultad().getNombre());
                 jsonObject.addProperty("periodo_academico", g.getPeriodo().getFechaInicio().toGMTString());
 
-                jsonArray.add(jsonObject);
+                jsonArray.add(jsonObject);//se agrega el objeto al array
             }
 
-            jsonRespuesta = jsonArray.toString();
+            jsonRespuesta = jsonArray.toString();//se trandorma a texto
         } catch (NumberFormatException ex) {
             logger.log(Level.INFO, ex.getClass().getSimpleName() + ": Se necesitan parametros numericos.");
         } finally {
-            return jsonRespuesta;
+            return jsonRespuesta; //retorna la respuesta
         }
     }
 

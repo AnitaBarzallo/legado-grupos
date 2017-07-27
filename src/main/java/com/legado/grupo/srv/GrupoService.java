@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.legado.grupo.srv;
-
+//librerias
 import com.legado.grupo.dao.AsignaturaDAO;
 import com.legado.grupo.dao.CarreraDAO;
 import com.legado.grupo.dao.GrupoDAO;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+//fin librerias
 /**
  *
  * @author EdwinCabrera
@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GrupoService {
-
+    //atributos globales
     @Autowired
     private PeriodoDAO periodoDAO;
     @Autowired
@@ -36,6 +36,7 @@ public class GrupoService {
     @Autowired
     private CarreraDAO carreraDAO;
 
+    //metodo que agrega un grupo 
     public void agregarGrupo(String nombreGrupo, int idPeriodo, int idAsignatura) throws Exception {
         Periodo periodo = periodoDAO.buscarPorID(idPeriodo);
         Asignatura asignatura = asignaturaDAO.buscarPorID(idAsignatura);
@@ -45,10 +46,12 @@ public class GrupoService {
         grupoDAO.agregar(grupo, asignatura, periodo);
     }
 
+    //busca un grupo por id
     public Grupo buscarPorID(int id) {
         return grupoDAO.buscarPorID(id);
     }
 
+    //actualiza los atributos de un grupo nombre y periodo
     public void actualizar(int idGrupo, String nombreGrupo, int idPeriodo) {
         Grupo grupo = grupoDAO.buscarPorID(idGrupo);
         Periodo periodo = periodoDAO.buscarPorID(idPeriodo);
@@ -56,6 +59,7 @@ public class GrupoService {
         grupo.setPeriodo(periodo);
     }
 
+    //actualiza los atributos de un grupo nombre, periodo y asgnatura por id
     public void actualizar(int idGrupo, String nombreGrupo, int idPeriodo, int idAsignatura) {
         Grupo grupo = grupoDAO.buscarPorID(idGrupo);
         Periodo periodo = periodoDAO.buscarPorID(idPeriodo);
@@ -65,6 +69,7 @@ public class GrupoService {
         grupo.setAsignatura(asignatura);
     }
 
+    //actualiza los atributos de un grupo nombre, periodo y asgnatura por nombre
     public void actualizar(int idGrupo, String nombreGrupo, int idPeriodo, String nombreAsignatura) {
         Grupo grupo = grupoDAO.buscarPorID(idGrupo);
         Periodo periodo = periodoDAO.buscarPorID(idPeriodo);
@@ -74,18 +79,22 @@ public class GrupoService {
         grupo.setAsignatura(asignatura);
     }
 
+    //elimina un grupo mediante id
     public void eliminarPorID(int id) {
         grupoDAO.eliminarPorId(id);
     }
 
+    //lista los grupos existentes
     public List<Grupo> listarGrupos() {
         return grupoDAO.listar();
     }
 
+    //lista los miebros de un grupo 
     public List<Miembro> buscarMiembroGrupo(int idGrupo) {
         return buscarPorID(idGrupo).getMiembros();
     }
 
+    //lista los grupos (r)
     public List<Grupo> listar() {
         return grupoDAO.listar();
     }

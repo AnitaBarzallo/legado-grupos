@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.legado.grupo.controller;
-
+// librerias 
 import com.legado.grupo.srv.*;
 import com.legado.grupo.dom.*;
 import com.legado.grupo.srv.GrupoService;
@@ -16,10 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
+// fin librerias
 
 @Controller
 public class GrupoHttpController {
+    //atributos globales
     @Autowired
     private FacultadService facultadSRV;     
     @Autowired
@@ -32,7 +33,7 @@ public class GrupoHttpController {
     private GrupoService grupoSrv;
     
     private static final Logger logger = Logger.getLogger(GrupoHttpController.class.getName());
-    
+    //fin atributos globales
     @RequestMapping(value="", method=RequestMethod.GET)
     public String index(Model model) {
         return "index";
@@ -49,13 +50,13 @@ public class GrupoHttpController {
         mv.setViewName("grupos");
 	return mv;
     }
-    
+    //datos recibidos del form situado en index.html, se usa metodo POST
     @RequestMapping(value = "/agregar", method = RequestMethod.POST)
-    public ModelAndView agregarGrupo(@RequestParam("nombreGrupo") String nombreGrupo,
-                                @RequestParam("asignaturaSeleccionada") int idAsignatura,
+    public ModelAndView agregarGrupo(@RequestParam("nombreGrupo") String nombreGrupo,//creamos y asignamos variables para datos
+                                @RequestParam("asignaturaSeleccionada") int idAsignatura,// ingresados des el formulario
                                 @RequestParam("periodoSeleccionado") int idPeriodo) throws Exception {
-        grupoSrv.agregarGrupo(nombreGrupo, idPeriodo, idAsignatura);
-        return new ModelAndView("index");
+        grupoSrv.agregarGrupo(nombreGrupo, idPeriodo, idAsignatura);//envio de datos a GrupoService
+        return new ModelAndView("index");//regreso a pagina principal
     }
     
 //    Crear una carrera nueva
@@ -75,31 +76,34 @@ public class GrupoHttpController {
 //        return new ModelAndView("index");
 //    }
     
-    
+    //metodo que devuelve lista de facultades
     @ModelAttribute("facultades")
     public List<Facultad> listarFacultades(){
-        return facultadSRV.listarFacultades();
+        return facultadSRV.listarFacultades();//retorna lista de facultades
     }
     
+    //metodo para listar carreras
     @ModelAttribute("carreras")
     public List<Carrera> listarCarreras(){
-        return carreraSRV.listar();
+        return carreraSRV.listar();//retorna lista de carreras
     }
     
+    //metodo para listar materias
     @ModelAttribute("materias")
     public List<Asignatura> listarMaterias(){
-        return asignaturaSRV.listar();
+        return asignaturaSRV.listar();//retorna lista de materias
     }
     
+    //metodo para listar periodos
     @ModelAttribute("periodos")
     public List<Periodo> listarPeriodos(){
-        return periodoSRV.listarPeriodos();
+        return periodoSRV.listarPeriodos();//retorna lista de periodos lectivos
     }
     
-    
+    //metodo para listar grupos
     @ModelAttribute("listagrupos")
     public List<Grupo> listaGrupos(){
-        return grupoSrv.listarGrupos();
+        return grupoSrv.listarGrupos();//retorna lista de grupos
     }
 
 //    Aplicando ajax
