@@ -8,6 +8,9 @@ package com.legado.grupo.controller;
 import com.legado.grupo.srv.*;
 import com.legado.grupo.dom.*;
 import com.legado.grupo.srv.GrupoService;
+import com.legado.grupo.tmp.Institucion;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +39,8 @@ public class GrupoHttpController {
     //fin atributos globales
     @RequestMapping(value="", method=RequestMethod.GET)
     public String index(Model model) {
+        Institucion i=new Institucion();
+	model.addAttribute("institucion", i);
         return "index";
     }
     
@@ -51,12 +56,13 @@ public class GrupoHttpController {
 	return mv;
     }
     //datos recibidos del form situado en index.html, se usa metodo POST
+  
     @RequestMapping(value = "/agregar", method = RequestMethod.POST)
     public ModelAndView agregarGrupo(@RequestParam("nombreGrupo") String nombreGrupo,//creamos y asignamos variables para datos
-                                @RequestParam("asignaturaSeleccionada") int idAsignatura,// ingresados des el formulario
+                                @RequestParam("idAsignatura") int idAsignatura,// ingresados des el formulario
                                 @RequestParam("periodoSeleccionado") int idPeriodo) throws Exception {
         grupoSrv.agregarGrupo(nombreGrupo, idPeriodo, idAsignatura);//envio de datos a GrupoService
-        return new ModelAndView("index");//regreso a pagina principal
+        return new ModelAndView("redirect:/");//regreso a pagina principal
     }
     
 //    Crear una carrera nueva
@@ -65,16 +71,9 @@ public class GrupoHttpController {
             @RequestParam("facultadSeleccionada") int idfacultad) throws Exception {
         
         carreraSRV.agregar(nombreCarrera, idfacultad);
-        return new ModelAndView("index");
+        return new ModelAndView("redirect:/");
     }
-//    
-////    Agregar una nueva asignatura
-//    @RequestMapping(value = "", method = RequestMethod.POST)
-//    public ModelAndView agregarAsignatura(@RequestParam("agregarAsignatura") String nombreAsignatura,
-//        @RequestParam("agregarCarrera") String nombreCarrera) throws Exception {
-//        asignaturaSRV.agregar(nombreAsignatura, nombreCarrera);
-//        return new ModelAndView("index");
-//    }
+
     
     //metodo que devuelve lista de facultades
     @ModelAttribute("facultades")
@@ -82,16 +81,9 @@ public class GrupoHttpController {
         return facultadSRV.listarFacultades();//retorna lista de facultades
     }
     
-    //metodo para listar carreras
-    @ModelAttribute("carreras")
-    public List<Carrera> listarCarreras(){
-        return carreraSRV.listar();//retorna lista de carreras
-    }
-    
-    //metodo para listar materias
-    @ModelAttribute("materias")
-    public List<Asignatura> listarMaterias(){
-        return asignaturaSRV.listar();//retorna lista de materias
+    @ModelAttribute("asi")
+    public List<Asignatura> listarC(){
+        return asignaturaSRV.listar();//retorna lista de facultades
     }
     
     //metodo para listar periodos
@@ -106,16 +98,19 @@ public class GrupoHttpController {
         return grupoSrv.listarGrupos();//retorna lista de grupos
     }
 
-//    Aplicando ajax
-
-//    @RequestMapping(value = "/", method = RequestMethod.GET)
-//    public String refreshItem(@RequestParam("agregar") String orderId, Model model) {
-////    List<Grupo> list= Grupo.findItemsByOrder(idgrupo).getResull
-////        List<Item> itemList = Item.findItemsByOrderId(orderId).getResultList();
-////
-////    model.addAttribute("itemList", itemList);
-//
-//    return "myView :: #item";
+    @RequestMapping("/ajax/facuCarrera")
+    public String ajaxFacultades(@RequestParam("idFacultad") int idFacultad, Model model) {
+        Facultad f=facultadSRV.buscarPorID(idFacultad);    
+        model.addAttribute("carreras", f.getCarreras());
+        return "index :: carreras";
+    }
+    
+    @RequestMapping("/ajax/carreMateria")
+    public String ajaxCarreras(@RequestParam("idCarrera") int idCarrera, Model model) {
+        Carrera c=carreraSRV.buscarPorID(idCarrera);
+        model.addAttribute("asignaturas", c.getAsignaturas());
+        return "index :: asignaturas";
+    }
 
 }
 

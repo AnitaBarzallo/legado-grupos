@@ -13,6 +13,7 @@ import com.legado.grupo.dom.Grupo;
 import com.legado.grupo.dom.Miembro;
 import com.legado.grupo.dom.Periodo;
 import com.legado.grupo.srv.FacultadService;
+import com.legado.grupo.srv.GrupoService;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,9 @@ public class GrupoApplication implements CommandLineRunner {
     @Autowired
     private GrupoDAO grupoDAO;
     
+    @Autowired
+    private GrupoService grupoService;
+    
 
     public static void main(String[] args) {
         SpringApplication.run(GrupoApplication.class, args);
@@ -43,9 +47,64 @@ public class GrupoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
+        /*Facultad facultadIng = new Facultad("Ingenieria");
+        Facultad facultad2 = new Facultad("Arquitectura");
+        
+        Carrera carreraSistemas = new Carrera("Sistemas");
+        Carrera carreraElectronica = new Carrera("Electronica");
+        
+        Asignatura asignaturaS = new Asignatura("Tecnologias Web");
+        Asignatura asignaturaS2 = new Asignatura("Calidad de Software");
+        Asignatura asignaturaS3 = new Asignatura("Redes de computadores");
+        Asignatura asignaturaS4 = new Asignatura("Programacion Web");
+        Asignatura asignaturaS5 = new Asignatura("Emprendimiento");
+        Asignatura asignaturaS6 = new Asignatura("Sistemas Distribuidos");
+        
+        Asignatura asignaturaE = new Asignatura("Electronica de Potencia");
+        Asignatura asignaturaE2 = new Asignatura("Microcontroladores Avanzados");
+        
+        Periodo periodo = new Periodo(new Date());
+        
+        Grupo grupo = new Grupo("Grupo1");
+        Grupo grupo2 = new Grupo("Grupo2");
+        Grupo grupo3 = new Grupo("Grupo3");
+        Grupo grupo4 = new Grupo("Grupo4");
+        
+        Miembro miembro = new Miembro();
+        Miembro miembro2 = new Miembro();
+        
+        facuDAO.agregar(facultadIng);
+        carreDAO.agregar(carreraSistemas, facultadIng);
+        carreDAO.agregar(carreraElectronica, facultadIng);
+        
+        asigDAO.agregar(asignaturaS, carreraSistemas);
+        asigDAO.agregar(asignaturaS2, carreraSistemas);
+        asigDAO.agregar(asignaturaS3, carreraSistemas);
+        asigDAO.agregar(asignaturaS4, carreraSistemas);
+        asigDAO.agregar(asignaturaS5, carreraSistemas);
+        asigDAO.agregar(asignaturaS6, carreraSistemas);
+        
+        asigDAO.agregar(asignaturaE, carreraElectronica);
+        asigDAO.agregar(asignaturaE2, carreraElectronica);
+        
+        periDAO.agregar(periodo);
+        grupoDAO.agregar(grupo, asignaturaS, periodo);
+        grupoDAO.agregar(grupo2, asignaturaS, periodo);
+        grupoDAO.agregar(grupo3, asignaturaS2, periodo);
+        
+        grupoDAO.agregar(grupo4, asignaturaE, periodo);
+        grupoDAO.agregar(grupo4, asignaturaE2, periodo);
+        
+        miemDAO.agregar(miembro,grupo);        
+        miemDAO.agregar(miembro2,grupo);     
+        
+        System.out.println("Facultad:" + facuDAO.buscarPorNombre("Ingenieria").toString());
+        System.out.println("Carrera: " + carreDAO.buscarPorNombre("Sistemas").toString());
+        System.out.println("Asignatura: " + asigDAO.buscarPorNombre("Tecnologias Web").toString());
+        
         /*Facultad facultad = new Facultad("Ingenieria");
         Carrera carrera = new Carrera("Sistemas");
-        Asignatura asignatura = new Asignatura("Tecnologias Web");     
+        Asignatura asignatura = new Asignatura("Tecnologias Web");        
         Periodo periodo = new Periodo(new Date());
         Grupo grupo = new Grupo("Grupo1");
         Miembro miembro = new Miembro();
@@ -74,9 +133,6 @@ public class GrupoApplication implements CommandLineRunner {
         for(Facultad f : facultades){
             System.out.println(f.toString());
         }*/
-        
-        /*asigDAO.agregar(new Asignatura("Mineria de Datos"), carreDAO.buscarPorNombre("Sistemas"));
-        grupoDAO.agregar(new Grupo("Grupo2"), asigDAO.buscarPorNombre("Mineria de Datos"), periDAO.buscarPorID(1));*/
     }
 
 }

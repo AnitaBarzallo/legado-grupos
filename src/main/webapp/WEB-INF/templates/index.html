@@ -30,13 +30,10 @@
                         
                         $("#idAsignatura").load('/ajax/carreMateria', $("#idCarrera").serialize());
                         $('#idCarrera').on('change', function() {
-                                $("#idAsignatura").load('/ajax/carreMateria', $("#idCarrera").serialize());
+                               $("#idAsignatura").load('/ajax/carreMateria', $("#idCarrera").serialize());
                         });
     
-                        $("#idAsignatura").load('/ajax/carreMateria', $("#idFacultad").serialize());
-                        $('#idFacultad').on('change', function() {
-                                $("#idAsignatura").load('/ajax/carreMateria', $("#idFacultad").serialize());
-                        });
+ 
     
 	  	});
 
@@ -66,21 +63,21 @@
                         <br>
                         <!--Facultades-->
                         <div class="input-group col-md-12">
-                            <select th:field="*{idFacultad}" required="required" class="form-control show-tick" onchange="this"  >
+                            <select th:field="*{idFacultad}"  class="form-control show-tick">
                                 <option th:each="facultad : ${facultades}" th:value="${facultad.id_facultad}" th:text="${facultad.nombre}" />
                             </select>
                         </div>
                         <br>
                         <!--Carreras-->
                         <div class="input-group col-md-12">
-                            <select th:field="*{idCarrera}" required="required" class="form-control" onchange="this">
+                            <select th:field="*{idCarrera}"  class="form-control" >
                                     <option th:fragment="carreras" th:each="carrera : ${carreras}" th:value="${carrera.id_carrera}" th:text="${carrera.nombre}" />
                             </select>
                         </div>    
                         <br>
                         <!--Asignatura-->    
                         <div  class="input-group col-md-12">    
-                            <select th:field="*{idAsignatura}" required="required" class="form-control show-tick" onchange="this">
+                            <select th:field="*{idAsignatura}"  name="asignaturaSeleccionada" class="form-control show-tick" >
                                 <option th:fragment="asignaturas" th:each="materia : ${asignaturas}" th:value="${materia.id_materia}" th:text="${materia.nombre}"></option>   
                             </select> 
                         </div>
@@ -98,22 +95,6 @@
                             <button type="submit" class="btn btn-primary" style="width: 200px;" id="btnAgregarGrupo"> <span class="glyphicon glyphicon-floppy-saved"></span> Agregar</button>                                      
                         </div> 
                     </form> 
-
-    
-<!--                        <form th:object="${institucion}" method="post">
-                            <div class="form-group">
-                                <label for="marca">Marca</label>
-                                <select th:field="*{idFacultad}" required="required" class="form-control" >
-                                        <option th:each="brand : ${brands}" th:value="${brand.id_carrera}" th:text="${brand.nombre}" />
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="modelo">Modelo</label>
-                                <select th:field="*{idCarrera}" required="required" class="form-control">
-                                        <option th:fragment="models" th:each="model : ${models}" th:value="${model}" th:text="${model}" />
-                                </select>
-                            </div>
-                        </form>-->
                 </div>                            
             </div>
         </div>
@@ -131,26 +112,44 @@
         <!--//////////////////////////////////////////////////////////////////////////////////////////////////////-->    
             
         <!--ventana de listado de cursos-->
-                <div class="modal fade" id="ventanaListar">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h3 class="modal-title">  Listado de Grupos </h3>               
-                            </div>
-                             <!--contenido de la ventana-->
-                            <div class="modal-body"> 
-                                <div class="input-group">
-                                    <a href="#" class="list-group-item" th:each="listagrupos:${listagrupos}" th:value="${listagrupos}" th:text="${listagrupos}"></a>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <!--Pie de pagina-->
-                                <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cerrar</button>
-                            </div>
-                        </div>
+        <div class="modal fade" id="ventanaListar" data-spy="scroll" data-target=".navbar" data-offset="50">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title">  Listado de Grupos </h3>               
+                    </div>
+                     <!--contenido de la ventana-->
+                    <div class="modal-body"> 
+                        <table class="table table-fixed" >
+                             <thead>
+                            <tr>
+                                <th> Id Grupo</th>
+                                 <th> nombre</th>
+                                  <th> asignatura</th>
+                                   <th> periodo</th>
+                            </tr>
+                             </thead>
+                            <tbody
+                                <tr th:each="grupo: ${listagrupos}">
+                                    <td th:text="${grupo.id_grupo}"></td>
+                                    <td th:text="${grupo.nombre}"></td>
+                                    <td th:text="${grupo.asignatura.nombre}"></td>
+                                    <td th:text="${grupo.periodo.fechaInicio}"></td>
+                                </tr>
+                            </tbody>
+
+
+                        </table>
+
+                    </div>
+                    <div class="modal-footer">
+                        <!--Pie de pagina-->
+                        <button type="submit" class="btn btn-primary pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cerrar</button>
                     </div>
                 </div>
+            </div>
+        </div>
                  
         <!--//////////////////////////////////////////////////////////////////////////////////////////////////////-->    
       
