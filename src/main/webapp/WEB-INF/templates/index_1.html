@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:th="http://www.thymeleaf.org"
+          xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" th:href="@{resources/css/estilo.css}">
+    </head>
+    <body>
+       <div class="container">
+            <div class="header">
+                <img  class="logo_icono"src="resources/imagenes/logo_icono.png" > 
+                <img  class="logo_nombre"src="resources/imagenes/logo_nombre.png" >
+            </div>
+            <div class="padre">
+                <div class="hijo"> 
+                    <h2> Crear Grupos</h2>
+                    
+                    <!--Listar Facultades-->
+                    <!--tr th:each = "facultad : ${facultades}">
+                            <td th:text="${facultad.id_facultad}"></td>
+                            <td th:text="${facultad.nombre}"></td>
+                    </tr-->
+                                        
+                    
+                    <form method="post" action="agregar" role="form">
+                        <input type="text" id="nombreGrupo" name="nombreGrupo" placeholder="Nombre del grupo" />
+
+                        <!--Agregar facultades al combobox-->
+                        <select  id="ComboBoxFacultades" name="facultadSeleccionada" onChange="onstatechange(this)">
+                            <option value="-1">Seleccione la Facultad</option>
+                            <option th:each="facultad : ${facultades}" th:value="${facultad.id_facultad}" th:text="${facultad.nombre}"></option>
+                        </select>
+                        
+                        <!--Agregar carreras al combobox-->
+                        <select  id="ComboBoxCarrera" name="xarreraSeleccionada" onChange="onstatechange(this)">
+                            <option value="-1">Seleccione la Carrera</option>
+                            <option th:each="carrera : ${carreras}" th:value="${carrera.id_carrera}" th:text="${carrera.nombre}"></option>
+                        </select>
+                        
+                        <!--Agregar materias al combobox-->
+                        <select  id="ComboBoxAsignatura" name="asignaturaSeleccionada" onChange="onstatechange(this)">
+                            <option value="-1">Seleccione la Asignatura</option>
+                            <option th:each="materia : ${materias}" th:value="${materia.id_materia}" th:text="${materia.nombre}"></option>
+                        </select>
+                        
+                        <!--Agregar periodos al combobox-->
+                        <select  id="ComboBoxAsignatura" name="periodoSeleccionado" onChange="onstatechange(this)">
+                            <option value="-1">Seleccione el periodo</option>
+                            <option th:each="periodo : ${periodos}" th:value="${periodo.id_periodo}" th:text="${periodo.fechaInicio}"></option>
+                        </select>
+                        
+                        <button type="submit" id="btnAgregarGrupo" >Agregar</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>        
+    </body>
+</html>

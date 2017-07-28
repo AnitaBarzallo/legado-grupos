@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class GrupoRestClient {
 
-    private static String URL_LEGADO_USUARIOS = "172.16.147.105:8080";
+    private static String URL_LEGADO_USUARIOS = "172.16.147.108:9091";
     private static String URL_LEGADO_GRUPOS = "localhost:9092";
 
     /*
