@@ -112,7 +112,7 @@ public class Grupo implements Serializable {
     //redeminimos el metodo toString
     @Override
     public String toString() {
-        return "Grupo{" + "idGrupo=" + id_grupo + ", nombre=" + nombre + ", miembros=" + miembros + ", asignatura=" + asignatura.getNombre() + ", periodo=" + periodo.getFechaInicio() + '}';
+        return "Grupo{" + "idGrupo=" + id_grupo + ", nombre=" + nombre + ", miembros="+ miembros + ", asignatura=" + asignatura.getNombre() + ", periodo=" + periodo.getFechaInicio() + '}';
     }
 
 }

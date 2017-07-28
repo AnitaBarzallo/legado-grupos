@@ -63,7 +63,7 @@ public class Miembro implements Serializable {
     //redefinimos el metodo toString
     @Override
     public String toString() {
-        return "Miembro{" + "idMiembro=" + id_usuario + ", grupo=" + grupos + '}';
+        return "Miembro{" + "idMiembro=" + id_usuario + ", grupo=..." + '}';
     }
 
 }
