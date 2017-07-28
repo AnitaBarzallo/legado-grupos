@@ -1,30 +1,38 @@
-
 package com.legado.grupo.dom;
 
 //lirerias
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 //fin lirerias
+
 @Entity
-@Table(name="miembros")//nombre de la tabla en la bd
+@Table(name = "miembros")//nombre de la tabla en la bd
 
 public class Miembro implements Serializable {
+
     //atributos globales
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_usuario;
-    
-    @ManyToOne
-    @JsonIgnore private Grupo grupo;
-    
+
+    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinTable(name = "MiembroGrupo", joinColumns = {
+        @JoinColumn(name = "IdMiembro")}, inverseJoinColumns = {
+        @JoinColumn(name = "IdGrupo")})
+    @JsonIgnore
+    private List<Grupo> grupos;
+
     //constructores
     public Miembro() {
+        this.grupos = new ArrayList<>();
     }
 
     public Miembro(int idMiembro) {
         this.id_usuario = idMiembro;
-        this.grupo=new Grupo();
+        this.grupos = new ArrayList<>();
     }
     //fin constructores
 
@@ -39,19 +47,23 @@ public class Miembro implements Serializable {
     }
 
     //metodo para obtener un grupo
-    public Grupo getGrupo() {
-        return grupo;
+    public List<Grupo> getGrupo() {
+        return grupos;
     }
 
     //metodo para guardar un grupo
-    public void setGrupo(Grupo grupo) {
-        this.grupo = grupo;
+    public void setGrupo(List<Grupo> grupos) {
+        this.grupos = grupos;
+    }
+    
+    public void addGrupo(Grupo grupo) {
+        this.grupos.add(grupo);
     }
 
     //redefinimos el metodo toString
     @Override
     public String toString() {
-        return "Miembro{" + "idMiembro=" + id_usuario + ", grupo=" + grupo.getNombre() + '}';
+        return "Miembro{" + "idMiembro=" + id_usuario + ", grupo=" + grupos + '}';
     }
-  
+
 }

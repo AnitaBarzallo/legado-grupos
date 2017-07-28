@@ -46,7 +46,7 @@ public class GrupoApplication implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
         /*Facultad facultad = new Facultad("Ingenieria");
-        Carrera carrera = new Carrera("Sistemas");
+        Carrera carrera = new Carrera("Ingenieria de sistemas");
         Asignatura asignatura = new Asignatura("Tecnologias Web");     
         Periodo periodo = new Periodo(new Date());
         Grupo grupo = new Grupo("Grupo1");
@@ -57,28 +57,15 @@ public class GrupoApplication implements CommandLineRunner {
         asigDAO.agregar(asignatura, carrera);
         periDAO.agregar(periodo);
         grupoDAO.agregar(grupo, asignatura, periodo);
-        miemDAO.agregar(miembro,grupo);        
+        miemDAO.agregar(miembro,grupo);
         
-        System.out.println("Facultad:" + facuDAO.buscarPorNombre("Ingenieria").toString());
-        System.out.println("Carrera: " + carreDAO.buscarPorNombre("Sistemas").toString());
-        System.out.println("Asignatura: " + asigDAO.buscarPorNombre("Tecnologias Web").toString());*/
+        grupoDAO.agregar(new Grupo("Grupo2"), asigDAO.buscarPorNombre("Tecnologias Web"), periDAO.buscarPorID(1));
+                       
+        Miembro m1 = miemDAO.buscarPorID(1);
+        miemDAO.agregar(m1, grupoDAO.buscarPorNombre("Grupo2")); 
         
-        //Facultad facultad = facuDAO.buscarPorNombre("Arqui");
-        //System.out.println(facultad.toString());
-        
-        //Grupo grupo = grupoDAO.buscarPorNombre("Grupo1");
-        //System.out.println(grupo.toString());
-        
-        //Asignatura asignatura = asigDAO.buscarPorNombre("Dibujo");
-        //System.out.println(asignatura.toString());
-        
-        /*List<Facultad> facultades = facuDAO.listar();
-        for(Facultad f : facultades){
-            System.out.println(f.toString());
-        }*/
-        
-        /*asigDAO.agregar(new Asignatura("Mineria de Datos"), carreDAO.buscarPorNombre("Sistemas"));
-        grupoDAO.agregar(new Grupo("Grupo2"), asigDAO.buscarPorNombre("Mineria de Datos"), periDAO.buscarPorID(1));*/
+        Miembro m2 = new Miembro();
+        miemDAO.agregar(m2, grupoDAO.buscarPorNombre("Grupo2")); */
     }
 
 }

@@ -121,7 +121,7 @@ public class GrupoRestController {
     }
 
     /*
-    Obtener Lista de grupos en los que está un usuario
+    Obtener Lista de grupos en los que estÃ¡ un usuario
      */
     @RequestMapping(value = "/get_grupos_usuario", method = RequestMethod.GET)
     public String get_grupos_usuario(@RequestParam String id_usuario) {
@@ -201,7 +201,7 @@ public class GrupoRestController {
 
             Grupo grupo = grupoSRV.buscarPorID(idGrupo);//instancia de grupo y miembro
             Miembro miembro = new Miembro(idUsuario);
-
+            
             //Existe el usuario?
             if (grupo != null) {//si existe un grupo ingresa 
                 if (!grupoSRV.existeMiembroEnGrupo(idUsuario, idGrupo)) {
@@ -263,7 +263,7 @@ public class GrupoRestController {
     }
 
     /*
-    Método para provar invocación de servicios REST externos
+    MÃ©todo para provar invocaciÃ³n de servicios REST externos
      */
     @RequestMapping(value = "/get_usuario", method = RequestMethod.GET)
     public Usuario get_usuario(@RequestParam String id_usuario) {
