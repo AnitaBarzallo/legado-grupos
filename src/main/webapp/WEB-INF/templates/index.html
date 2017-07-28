@@ -24,9 +24,20 @@
                   
 	  		$("#idCarrera").load('/ajax/facuCarrera', $("#idFacultad").serialize());
 		  	$('#idFacultad').on('change', function() {
-                               
 		  		$("#idCarrera").load('/ajax/facuCarrera', $("#idFacultad").serialize());
 		  	});
+
+                        
+                        $("#idAsignatura").load('/ajax/carreMateria', $("#idCarrera").serialize());
+                        $('#idCarrera').on('change', function() {
+                                $("#idAsignatura").load('/ajax/carreMateria', $("#idCarrera").serialize());
+                        });
+    
+                        $("#idAsignatura").load('/ajax/carreMateria', $("#idFacultad").serialize());
+                        $('#idFacultad').on('change', function() {
+                                $("#idAsignatura").load('/ajax/carreMateria', $("#idFacultad").serialize());
+                        });
+    
 	  	});
 
 	+]*/ 
@@ -55,53 +66,29 @@
                         <br>
                         <!--Facultades-->
                         <div class="input-group col-md-12">
-                            <select th:field="*{idFacultad}" required="required" class="form-control show-tick"  >
+                            <select th:field="*{idFacultad}" required="required" class="form-control show-tick" onchange="this"  >
                                 <option th:each="facultad : ${facultades}" th:value="${facultad.id_facultad}" th:text="${facultad.nombre}" />
                             </select>
                         </div>
                         <br>
                         <!--Carreras-->
                         <div class="input-group col-md-12">
-                            <select th:field="*{idCarrera}" required="required" class="form-control">
+                            <select th:field="*{idCarrera}" required="required" class="form-control" onchange="this">
                                     <option th:fragment="carreras" th:each="carrera : ${carreras}" th:value="${carrera.id_carrera}" th:text="${carrera.nombre}" />
                             </select>
                         </div>    
                         <br>
                         <!--Asignatura-->    
-                        <div class="input-group col-md-12">    
-                            <select class="form-control show-tick" id="ComboBoxFacultades" name="facultadSeleccionada" onChange="onstatechange(this)">
-                                <option th:each="facultad : ${facultades}" th:value="${facultad.id_facultad}" th:text="${facultad.nombre}"></option>   
+                        <div  class="input-group col-md-12">    
+                            <select th:field="*{idAsignatura}" required="required" class="form-control show-tick" onchange="this">
+                                <option th:fragment="asignaturas" th:each="materia : ${asignaturas}" th:value="${materia.id_materia}" th:text="${materia.nombre}"></option>   
                             </select> 
                         </div>
                         <br> 
-
-                         <!--Agregar Carrera-->
-<!--                        <div class="input-group">    
-                            <select class="form-control col-md-12" id="ComboBoxCarrera" name="xarreraSeleccionada" onChange="onstatechange(this)">
-                                <option value="-1">Seleccione la Carrera</option>
-                                <option th:each="carrera : ${carreras}" th:value="${carrera.id_carrera}" th:text="${carrera.nombre}"></option>    
-                            </select>
-                            <div class="input-group-btn">
-                                <a href="#ventana2"class="btn btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></a>         
-                            </div>
-                        </div>
-                        <br>
-                        Agregar Asignatura
-                       <div class="input-group">    
-                           <select class="form-control col-md-12" id="ComboBoxAsignatura" name="asignaturaSeleccionada" onChange="onstatechange(this)">
-                               <option value="-1">Seleccione la Asignatura</option>
-                               <option th:each="materia : ${materias}" th:value="${materia.id_materia}" th:text="${materia.nombre}"></option>
-                           </select>
-                           <div class="input-group-btn">
-                               <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
-                               <a href="#ventana3"class="btn btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></a> 
-                           </div>
-                       </div>-->
                     
                         <!--Periodo Academico-->
                        <div class="input-group col-md-12" >    
                            <select class="form-control " id="ComboBoxAsignatura" name="periodoSeleccionado" onChange="onstatechange(this)">
-                               <option value="-1">Seleccione el Período</option>
                                <option th:each="periodo : ${periodos}" th:value="${periodo.id_periodo}" th:text="${periodo.fechaInicio}" readonly></option>
                            </select>
                       </div>  
