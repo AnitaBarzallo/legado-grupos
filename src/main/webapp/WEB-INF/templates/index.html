@@ -29,7 +29,9 @@
 
                         
                         $("#idAsignatura").load('/ajax/carreMateria', $("#idCarrera").serialize());
+                     
                         $('#idCarrera').on('change', function() {
+                           
                                $("#idAsignatura").load('/ajax/carreMateria', $("#idCarrera").serialize());
                         });
     

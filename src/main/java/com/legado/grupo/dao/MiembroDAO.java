@@ -26,7 +26,7 @@ public class MiembroDAO implements Crud<Miembro> {
         }
         //Bidireccional: Un Miembro esta en un Grupo
         grupo.addMiembro(miembro);//relacion entre grupo y miembro
-        miembro.setGrupo(grupo);
+        miembro.addGrupo(grupo);
         
         repositorio.save(miembro);//guardamos al nuevo integrante
     }

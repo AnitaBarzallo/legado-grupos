@@ -5,6 +5,7 @@
  */
 package com.legado.grupo.dom;
 //librerias
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,43 +14,46 @@ import java.util.List;
 //fin librerias
 
 @Entity
-@Table(name="grupos")//nombre de la clase en la bd
+@Table(name = "grupos")//nombre de la clase en la bd
 
-public class Grupo implements Serializable{
+public class Grupo implements Serializable {
+
     //atributos globales
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_grupo;
-    
+
     private String nombre;
-    
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "grupo")//relacion de muchos a uno con la clase miembros
-    @JsonIgnore private List<Miembro> miembros;
-    
+
+    @ManyToMany(cascade = {CascadeType.MERGE}, mappedBy = "grupos", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<Miembro> miembros;
+
     @ManyToOne//relacion de muchos a uno con la clase asignatura
     private Asignatura asignatura;
-    
+
     @ManyToOne//relacion de muchos a uno con la clase periodo
     private Periodo periodo;
 
     //constructores
     public Grupo() {
+        this.miembros = new ArrayList<>();
     }
 
     public Grupo(String nombre) {
         this.nombre = nombre;
-        this.miembros=new ArrayList<>();
+        this.miembros = new ArrayList<>();
     }
-    
+
     public Grupo(int idGrupo, String nombre, Periodo periodo, Asignatura asignatura) {
         this.id_grupo = idGrupo;
         this.nombre = nombre;
         this.periodo = periodo;
         this.asignatura = asignatura;
-        this.miembros=new ArrayList<>();
+        this.miembros = new ArrayList<>();
     }
     //fin constructores
-    
+
     //metodo para obtener id de grupo
     public int getId_grupo() {
         return id_grupo;
@@ -99,15 +103,16 @@ public class Grupo implements Serializable{
     public void setMiembros(List<Miembro> miembros) {
         this.miembros = miembros;
     }
+
     //agregamos un miembro a la lista
-    public void addMiembro(Miembro miembro){
-        this.miembros.add(miembro); 
+    public void addMiembro(Miembro miembro) {
+        this.miembros.add(miembro);
     }
 
     //redeminimos el metodo toString
     @Override
     public String toString() {
-        return "Grupo{" + "idGrupo=" + id_grupo + ", nombre=" + nombre + ", miembros=" + miembros + ", asignatura=" + asignatura.getNombre() + ", periodo=" + periodo.getFechaInicio() + '}';
+        return "Grupo{" + "idGrupo=" + id_grupo + ", nombre=" + nombre + ", miembros="+ miembros + ", asignatura=" + asignatura.getNombre() + ", periodo=" + periodo.getFechaInicio() + '}';
     }
-    
+
 }

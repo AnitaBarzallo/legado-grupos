@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,7 @@ public class GrupoHttpController {
     
     private static final Logger logger = Logger.getLogger(GrupoHttpController.class.getName());
     //fin atributos globales
-    @RequestMapping(value="", method=RequestMethod.GET)
+    @RequestMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE, method=RequestMethod.GET)
     public String index(Model model) {
         Institucion i=new Institucion();
 	model.addAttribute("institucion", i);
@@ -108,6 +109,10 @@ public class GrupoHttpController {
     @RequestMapping("/ajax/carreMateria")
     public String ajaxCarreras(@RequestParam("idCarrera") int idCarrera, Model model) {
         Carrera c=carreraSRV.buscarPorID(idCarrera);
+        System.out.println("CONTROLLER: "+c.getNombre());
+        for(Asignatura a : c.getAsignaturas()){
+            System.out.println(a.getNombre());
+        }
         model.addAttribute("asignaturas", c.getAsignaturas());
         return "index :: asignaturas";
     }
